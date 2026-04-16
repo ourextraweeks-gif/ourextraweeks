@@ -475,15 +475,15 @@ function render() {
     const resortLower = (l['resort'] || '').toLowerCase();
     let emoji, cls;
     if (resortLower.includes('north')) {
-      emoji = '🌺'; cls = 'maui-n';
+      emoji = '\uD83C\uDF3A'; cls = 'maui-n';      // 🌺
     } else if (resortLower.includes('kaanapali')) {
-      emoji = '🐋'; cls = 'maui-s';
+      emoji = '\uD83D\uDC0B'; cls = 'maui-s';      // 🐋
     } else if (resortLower.includes('kierland')) {
-      emoji = '🌵'; cls = 'kierland';
+      emoji = '\uD83C\uDF35'; cls = 'kierland';    // 🌵
     } else if (resortLower.includes('garza')) {
-      emoji = '🌅'; cls = 'garza';
+      emoji = '\uD83C\uDF05'; cls = 'garza';       // 🌅
     } else {
-      emoji = '🏨'; cls = 'maui-s';
+      emoji = '\uD83C\uDFE8'; cls = 'maui-s';     // 🏨
     }
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
