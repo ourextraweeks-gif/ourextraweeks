@@ -329,6 +329,9 @@
 document.getElementById('yr').textContent = new Date().getFullYear();
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3TWX11WuudebrzNXPdfz8GNRP71rvScQQz9jg1s25J8ULjlH7pJdjVOsDsxm_e8Hje/pub?gid=1539875952&single=true&output=csv';
+const RESORT_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3TWX11WuudebrzNXPdfz8GNRP71rvScQQz9jg1s25J8ULjlH7pJdjVOsDsxm_e8Hje/pub?gid=836794829&single=true&output=csv';
+
+let resortInfo = {}; // keyed by lowercase resort name
 
 const TYPE_META = {
   'maui-n':   { emoji: '🌺', cls: 'maui-n' },
@@ -391,7 +394,13 @@ function getMonth(l) {
   return d ? d.month : null;
 }
 
-function getRedweek(l) {
+function getResortInfo(l) {
+  const key = (l['resort'] || '').toLowerCase().trim();
+  // Try exact match first, then partial
+  if (resortInfo[key]) return resortInfo[key];
+  const found = Object.keys(resortInfo).find(k => k.includes(key) || key.includes(k));
+  return found ? resortInfo[found] : {};
+}
   const val = l['redweek'] || l['redweek url'] || l['redweek_url'] || '';
   if (!val) return '';
   const lower = val.toLowerCase();
@@ -406,12 +415,20 @@ let activeFilters = { dest: 'all', year: 'all', month: 'all' };
 
 async function loadListings() {
   try {
-    const res = await fetch(CSV_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text = await res.text();
-    const parsed = parseCSV(text);
+    const [res1, res2] = await Promise.all([fetch(CSV_URL), fetch(RESORT_CSV_URL)]);
+    if (!res1.ok) throw new Error(`HTTP ${res1.status}`);
+    const [text1, text2] = await Promise.all([res1.text(), res2.text()]);
+
+    // Parse resort info into a lookup map
+    const resorts = parseCSV(text2);
+    resorts.forEach(r => {
+      const key = (r['resort'] || '').toLowerCase().trim();
+      if (key) resortInfo[key] = r;
+    });
+
+    const parsed = parseCSV(text1);
     if (parsed.length === 0) throw new Error('No rows parsed');
-    allListings = parsed.filter(r => (r['post'] || '').toLowerCase().trim() === 'yes');
+    allListings = parsed.filter(r => (r['status'] || '').toLowerCase().trim() === 'available');
   } catch(e) {
     document.getElementById('grid').innerHTML =
       '<p class="state-msg">Unable to load listings — please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
@@ -487,6 +504,9 @@ function render() {
     }
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
+    const resort = getResortInfo(l);
+    const room = l['room'] || resort['room type'] || resort['room'] || '2BR';
+    const bath = l['bath'] || resort['bath'] || resort['bathrooms'] || '2';
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
@@ -514,7 +534,7 @@ function render() {
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${loc} · ${l['view']} · ${l['room']}${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
+        <div class="card-meta">${loc} · ${l['view']} · ${room} · ${bath} bath${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
         <div class="card-footer">
           <div class="card-price">${price}</div>
           <span class="avail-badge">Available</span>
