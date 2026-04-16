@@ -59,6 +59,17 @@
   .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.25rem; }
   .about-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
 
+  .resorts-section { margin-bottom: 2rem; }
+  .resorts-section h2 { font-size: 17px; font-weight: 500; margin-bottom: 1rem; }
+  .resort-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .resort-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; display: flex; flex-direction: column; }
+  .resort-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .resort-card-thumb { height: 70px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+  .resort-card-body { padding: 0.75rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .resort-card-name { font-size: 13px; font-weight: 500; line-height: 1.4; }
+  .resort-card-loc { font-size: 12px; color: var(--text2); }
+  .resort-card-link { font-size: 11px; color: var(--info-text); margin-top: 6px; }
+
   .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
   .booking-box h2 { font-size: 17px; font-weight: 500; margin-bottom: 1.25rem; }
   .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
@@ -179,6 +190,52 @@
         <span class="about-pill">2BR lockoff villas</span>
         <span class="about-pill">Maui · Scottsdale · Mexico</span>
       </div>
+    </div>
+  </div>
+
+  <div class="resorts-section">
+    <div class="section-label">Our resorts</div>
+    <div class="resort-cards">
+      <a class="resort-card" href="https://www.marriott.com/en-us/hotels/oggws-the-westin-kaanapali-ocean-resort-villas/overview/" target="_blank" rel="noopener">
+        <div class="resort-card-thumb maui-s">🐋</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Westin Ka'anapali Ocean Resort Villas</div>
+          <div class="resort-card-loc">Maui, Hawaii</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
+      <a class="resort-card" href="https://www.marriott.com/en-us/hotels/oggwn-the-westin-kaanapali-ocean-resort-villas-north/overview/" target="_blank" rel="noopener">
+        <div class="resort-card-thumb maui-n">🌺</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Westin Ka'anapali Ocean Resort Villas North</div>
+          <div class="resort-card-loc">Maui, Hawaii</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
+      <a class="resort-card" href="https://www.marriott.com/en-us/hotels/phxwk-the-westin-kierland-villas-scottsdale/overview/" target="_blank" rel="noopener">
+        <div class="resort-card-thumb kierland">🌵</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Westin Kierland Villas</div>
+          <div class="resort-card-loc">Scottsdale, Arizona</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
+      <a class="resort-card" href="https://www.garzablancaresort.com/puerto-vallarta" target="_blank" rel="noopener">
+        <div class="resort-card-thumb garza">🌅</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Garza Blanca Preserve Resort &amp; Spa</div>
+          <div class="resort-card-loc">Puerto Vallarta, Mexico</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
+      <a class="resort-card" href="https://cancun.garzablancaresort.com/" target="_blank" rel="noopener">
+        <div class="resort-card-thumb garza">🏖️</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Garza Blanca Resort &amp; Spa</div>
+          <div class="resort-card-loc">Cancún, Mexico</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
     </div>
   </div>
 
