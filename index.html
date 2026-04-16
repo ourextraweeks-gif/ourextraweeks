@@ -332,9 +332,9 @@ const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3T
 
 const TYPE_META = {
   'maui-n':   { emoji: '🌺', cls: 'maui-n' },
-  'maui-s':   { emoji: '🌊', cls: 'maui-s' },
+  'maui-s':   { emoji: '🐋', cls: 'maui-s' },
   'kierland': { emoji: '🌵', cls: 'kierland' },
-  'garza':    { emoji: '🌴', cls: 'garza' },
+  'garza':    { emoji: '🌅', cls: 'garza' },
 };
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -392,7 +392,13 @@ function getMonth(l) {
 }
 
 function getRedweek(l) {
-  return l['redweek'] || l['redweek url'] || l['redweek_url'] || '';
+  const val = l['redweek'] || l['redweek url'] || l['redweek_url'] || '';
+  if (!val) return '';
+  const lower = val.toLowerCase();
+  if (lower.startsWith('http')) return val;
+  if (lower.includes('not posted') || lower.includes('not yet')) return val;
+  // Just an ID like R1416182 — prepend the base URL
+  return `https://www.redweek.com/posting/${val.trim()}`;
 }
 
 let allListings = [];
@@ -466,7 +472,19 @@ function render() {
   }
 
   grid.innerHTML = visible.map(l => {
-    const meta = TYPE_META[l['type']] || { emoji: '🏨', cls: 'maui-s' };
+    const resortLower = (l['resort'] || '').toLowerCase();
+    let emoji, cls;
+    if (resortLower.includes('north')) {
+      emoji = '🌺'; cls = 'maui-n';
+    } else if (resortLower.includes('kaanapali')) {
+      emoji = '🐋'; cls = 'maui-s';
+    } else if (resortLower.includes('kierland')) {
+      emoji = '🌵'; cls = 'kierland';
+    } else if (resortLower.includes('garza')) {
+      emoji = '🌅'; cls = 'garza';
+    } else {
+      emoji = '🏨'; cls = 'maui-s';
+    }
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
     const redweek = getRedweek(l);
@@ -487,7 +505,7 @@ function render() {
         : '';
     return `
     <div class="card">
-      <div class="card-thumb ${meta.cls}">${meta.emoji}</div>
+      <div class="card-thumb ${cls}">${emoji}</div>
       <div class="card-body">
         <div class="card-top">
           <div class="card-resort">${l['resort']}</div>
