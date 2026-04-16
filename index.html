@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Extra Weeks | Vacation Rentals</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff; --bg2: #f7f6f3; --bg3: #f0efe9;
+    --text: #1a1a1a; --text2: #5a5a56; --text3: #9a9994;
+    --border: rgba(0,0,0,0.1); --border2: rgba(0,0,0,0.18);
+    --radius: 10px; --radius-lg: 14px;
+    --success-bg: #eaf3de; --success-text: #3b6d11;
+    --info-bg: #e6f1fb; --info-text: #185fa5;
+    --amber-bg: #faeeda; --teal-bg: #e1f5ee;
+    --blue-bg: #e6f1fb; --coral-bg: #faece7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b;
+      --text: #f0efe9; --text2: #a0a09a; --text3: #6a6a64;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
+      --success-bg: #173404; --success-text: #c0dd97;
+      --info-bg: #042c53; --info-text: #b5d4f4;
+      --amber-bg: #412402; --teal-bg: #04342c;
+      --blue-bg: #042c53; --coral-bg: #4a1b0c;
+    }
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg3); color: var(--text); line-height: 1.6; min-height: 100vh; }
+  a { color: var(--info-text); }
+
+  nav { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 10; }
+  .nav-brand { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { font-size: 13px; padding: 6px 14px; border-radius: 8px; border: 0.5px solid var(--border2); color: var(--text); text-decoration: none; transition: background 0.12s; }
+  .nav-cta:hover { background: var(--bg2); color: var(--text) !important; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .hero { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem 2rem; margin-bottom: 2rem; }
+  .hero-tag { font-size: 11px; font-weight: 500; background: var(--info-bg); color: var(--info-text); display: inline-block; padding: 4px 12px; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5rem; }
+  .hero p { font-size: 15px; color: var(--text2); max-width: 580px; }
+  .hero-stats { display: flex; gap: 12px; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat-pill { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 18px; }
+  .stat-pill .slabel { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+  .stat-pill .sval { font-size: 20px; font-weight: 500; }
+
+  .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
+  .about-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+  .about-content h2 { font-size: 17px; font-weight: 500; margin-bottom: 0.6rem; }
+  .about-content p { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 0.65rem; }
+  .about-content p:last-of-type { margin-bottom: 0.75rem; }
+  .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.25rem; }
+  .about-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
+
+  .section-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+
+  .filters { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
+  .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .filter-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; min-width: 70px; flex-shrink: 0; }
+  .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .fbtn { padding: 5px 14px; font-size: 13px; border-radius: 20px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; white-space: nowrap; }
+  .fbtn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .fbtn:hover:not(.active) { background: var(--bg3); color: var(--text); }
+
+  .result-count { font-size: 13px; color: var(--text3); margin-bottom: 1rem; }
+
+  .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
+
+  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.15s; }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .card-thumb { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+  .card-thumb.maui-n { background: var(--blue-bg); }
+  .card-thumb.maui-s { background: var(--teal-bg); }
+  .card-thumb.kierland { background: var(--amber-bg); }
+  .card-thumb.garza { background: var(--coral-bg); }
+  .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+  .card-resort { font-size: 13px; font-weight: 500; max-width: 72%; line-height: 1.4; }
+  .yr-badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: var(--bg2); color: var(--text3); font-weight: 500; white-space: nowrap; }
+  .card-meta { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .card-dates { font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+  .card-dates strong { color: var(--text); font-weight: 500; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+  .card-price { font-size: 17px; font-weight: 500; }
+  .card-price sub { font-size: 12px; font-weight: 400; color: var(--text2); }
+  .avail-badge { font-size: 11px; padding: 3px 9px; border-radius: 6px; background: var(--success-bg); color: var(--success-text); font-weight: 500; }
+  .card-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .inquire-btn { flex: 1; padding: 9px; font-size: 13px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; transition: background 0.12s; font-family: inherit; }
+  .inquire-btn:hover { background: var(--bg2); }
+  .redweek-btn { flex: 1; padding: 9px; font-size: 13px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--info-text); text-decoration: none; display: flex; align-items: center; justify-content: center; transition: background 0.12s; }
+  .redweek-btn:hover { background: var(--info-bg); }
+
+  .state-msg { color: var(--text2); font-size: 14px; padding: 1.5rem 0; }
+  .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--text); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .contact-box { margin-top: 2.5rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; }
+  .contact-box h2 { font-size: 18px; font-weight: 500; margin-bottom: 0.4rem; }
+  .contact-box .sub { font-size: 14px; color: var(--text2); margin-bottom: 1.25rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .form-grid input, .form-grid textarea, .form-grid select { width: 100%; padding: 9px 13px; font-size: 14px; border: 0.5px solid var(--border2); border-radius: 8px; background: var(--bg2); color: var(--text); font-family: inherit; outline: none; transition: border-color 0.12s; }
+  .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus { border-color: var(--text); }
+  .form-grid textarea { grid-column: 1/-1; resize: vertical; }
+  .form-grid select { grid-column: 1/-1; }
+  .send-btn { padding: 10px 28px; font-size: 14px; border-radius: 8px; border: none; background: var(--text); color: var(--bg); cursor: pointer; font-family: inherit; transition: opacity 0.12s; }
+  .send-btn:hover { opacity: 0.85; }
+  .form-note { font-size: 12px; color: var(--text3); margin-top: 10px; }
+
+  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 0.5px solid var(--border); margin-top: 3rem; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 1.5rem 1.25rem; }
+    .hero h1 { font-size: 22px; }
+    .about-box { flex-direction: column; gap: 0.75rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid textarea, .form-grid select { grid-column: 1; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .filter-label { min-width: 56px; }
+    .card-actions { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Our Extra Weeks</a>
+  <div class="nav-links">
+    <a href="#about">Our story</a>
+    <a href="#listings">Listings</a>
+    <a class="nav-cta" href="#contact">Contact us</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-tag">Westin &amp; Tafer Resort Rentals</div>
+    <h1>Premium vacation weeks for rent</h1>
+    <p>Luxury resort weeks at Westin Kaanapali (Maui), Westin Kierland (Scottsdale), and Garza Blanca (Puerto Vallarta &amp; Cancun). All 2-bedroom lockoff villas with full resort amenities — rented directly from the owners.</p>
+    <div class="hero-stats">
+      <div class="stat-pill"><div class="slabel">Available weeks</div><div class="sval" id="avail-count">—</div></div>
+      <div class="stat-pill"><div class="slabel">Destinations</div><div class="sval">4</div></div>
+      <div class="stat-pill"><div class="slabel">Unit type</div><div class="sval">2BR</div></div>
+    </div>
+  </div>
+
+  <div class="about-box" id="about">
+    <div class="about-icon">🏝️</div>
+    <div class="about-content">
+      <h2>How we ended up with too much of a good thing</h2>
+      <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts — Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta and Cancun. We love every one of them. The problem is, there are only so many weeks in a year.</p>
+      <p>Rather than let these weeks sit unused, we rent them out to fellow travellers who want a luxury resort experience without the ownership commitment. You get a stunning 2-bedroom villa at a top-tier resort; we get to feel slightly better about our timeshare habit. Everyone wins.</p>
+      <p>We handle the name-change paperwork and reservation transfer ourselves — no third-party broker fees, no markups. You're dealing directly with the owners, so communication is fast and personal.</p>
+      <div class="about-pills">
+        <span class="about-pill">No broker fees</span>
+        <span class="about-pill">Direct from owners</span>
+        <span class="about-pill">Westin &amp; Tafer resorts</span>
+        <span class="about-pill">2BR lockoff villas</span>
+        <span class="about-pill">Maui · Scottsdale · Mexico</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="listings">
+    <div class="section-label">Browse listings</div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Destination</span>
+        <div class="filter-chips" id="dest-filters">
+          <button class="fbtn active" data-dest="all">All</button>
+          <button class="fbtn" data-dest="maui">🌺 Maui</button>
+          <button class="fbtn" data-dest="kierland">🌵 Scottsdale</button>
+          <button class="fbtn" data-dest="garza">🌴 Mexico</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Year</span>
+        <div class="filter-chips" id="year-filters">
+          <button class="fbtn active" data-year="all">All</button>
+          <button class="fbtn" data-year="2026">2026</button>
+          <button class="fbtn" data-year="2027">2027</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Month</span>
+        <div class="filter-chips" id="month-filters">
+          <button class="fbtn active" data-month="all">All</button>
+        </div>
+      </div>
+    </div>
+    <p class="result-count" id="result-count"></p>
+    <div class="listing-grid" id="grid">
+      <p class="state-msg"><span class="spinner"></span> Loading listings…</p>
+    </div>
+  </div>
+
+  <div class="contact-box" id="contact">
+    <h2>Inquire about a week</h2>
+    <p class="sub">Fill in the form below and we'll get back to you promptly at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>
+    <div class="form-grid">
+      <input type="text" id="f-name" placeholder="Your name" />
+      <input type="email" id="f-email" placeholder="Your email address" />
+      <select id="f-week"><option value="">Select a week you're interested in…</option></select>
+      <textarea id="f-msg" rows="3" placeholder="Any questions or special requests?"></textarea>
+    </div>
+    <button class="send-btn" onclick="sendInquiry()">Send inquiry →</button>
+    <p class="form-note" id="form-note"></p>
+  </div>
+
+</div>
+
+<footer>
+  &copy; <span id="yr"></span> Our Extra Weeks &nbsp;·&nbsp;
+  <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3TWX11WuudebrzNXPdfz8GNRP71rvScQQz9jg1s25J8ULjlH7pJdjVOsDsxm_e8Hje/pub?gid=1539875952&single=true&output=csv';
+
+const TYPE_META = {
+  'maui-n':   { emoji: '🌺', cls: 'maui-n' },
+  'maui-s':   { emoji: '🌊', cls: 'maui-s' },
+  'kierland': { emoji: '🌵', cls: 'kierland' },
+  'garza':    { emoji: '🌴', cls: 'garza' },
+};
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12 };
+
+function parseDate(str) {
+  if (!str) return null;
+  const m = str.trim().match(/([a-z]{3})\s+(\d+)\s+(\d{4})/i);
+  if (!m) return null;
+  return { month: MONTH_SHORT[m[1].toLowerCase()], year: parseInt(m[3]), display: `${m[1]} ${m[2]}` };
+}
+
+function formatDateRange(s, e) {
+  const sd = parseDate(s), ed = parseDate(e);
+  if (!sd) return s || '';
+  if (!ed) return s;
+  return `${sd.display} – ${ed.display}, ${ed.year}`;
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+
+  return lines.slice(1).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += ch; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim(); });
+    return obj;
+  }).filter(r => r['resort'] && r['resort'].length > 0);
+}
+
+function getLocation(l) {
+  const city = l['location'] || '';
+  const region = l['column 1'] || l['col 1'] || l['state'] || l['country'] || '';
+  return region ? `${city}, ${region}` : city;
+}
+
+function getDateDisplay(l) {
+  const s = l['start date'] || l['startdate'] || l['start_date'] || '';
+  const e = l['end date'] || l['enddate'] || l['end_date'] || '';
+  if (s && e) return formatDateRange(s, e);
+  return l['dates'] || s || '';
+}
+
+function getMonth(l) {
+  const s = l['start date'] || l['startdate'] || l['start_date'] || l['dates'] || '';
+  const d = parseDate(s);
+  return d ? d.month : null;
+}
+
+function getRedweek(l) {
+  return l['redweek'] || l['redweek url'] || l['redweek_url'] || '';
+}
+
+let allListings = [];
+let activeFilters = { dest: 'all', year: 'all', month: 'all' };
+
+async function loadListings() {
+  try {
+    const res = await fetch(CSV_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const parsed = parseCSV(text);
+    if (parsed.length === 0) throw new Error('No rows parsed');
+    allListings = parsed;
+  } catch(e) {
+    document.getElementById('grid').innerHTML =
+      '<p class="state-msg">Unable to load listings — please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
+    document.getElementById('avail-count').textContent = '—';
+    return;
+  }
+  buildMonthFilters();
+  render();
+}
+
+function buildMonthFilters() {
+  const present = new Set();
+  allListings.forEach(l => { const m = getMonth(l); if (m) present.add(m); });
+  const container = document.getElementById('month-filters');
+  Array.from(present).sort((a,b) => a-b).forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = 'fbtn';
+    btn.dataset.month = String(m);
+    btn.textContent = MONTH_NAMES[m - 1];
+    container.appendChild(btn);
+  });
+}
+
+function matches(l) {
+  const { dest, year, month } = activeFilters;
+  const loc = getLocation(l).toLowerCase();
+  if (dest === 'maui'     && !loc.includes('maui')) return false;
+  if (dest === 'kierland' && !loc.includes('scottsdale') && !loc.includes('arizona')) return false;
+  if (dest === 'garza'    && !loc.includes('mexico') && !loc.includes('vallarta') && !loc.includes('cancun')) return false;
+  if (year !== 'all' && String(l['year']) !== year) return false;
+  if (month !== 'all' && getMonth(l) !== parseInt(month)) return false;
+  return true;
+}
+
+function render() {
+  const grid = document.getElementById('grid');
+  const visible = allListings.filter(matches);
+  document.getElementById('avail-count').textContent = allListings.length;
+
+  const anyActive = Object.values(activeFilters).some(v => v !== 'all');
+  document.getElementById('result-count').textContent = anyActive
+    ? `${visible.length} listing${visible.length !== 1 ? 's' : ''} match your filters` : '';
+
+  const sel = document.getElementById('f-week');
+  sel.innerHTML = '<option value="">Select a week you\'re interested in…</option>';
+  allListings.forEach(l => {
+    const opt = document.createElement('option');
+    const d = getDateDisplay(l);
+    opt.value = `${l['resort']} – ${d}`;
+    opt.textContent = `${l['resort']} · ${d} (${l['year']})`;
+    sel.appendChild(opt);
+  });
+
+  if (visible.length === 0) {
+    grid.innerHTML = '<p class="state-msg">No listings match your filters — try adjusting the selection above.</p>';
+    return;
+  }
+
+  grid.innerHTML = visible.map(l => {
+    const meta = TYPE_META[l['type']] || { emoji: '🏨', cls: 'maui-s' };
+    const loc = getLocation(l);
+    const dateStr = getDateDisplay(l);
+    const redweek = getRedweek(l);
+    const price = l['asking'] && l['asking'] !== ''
+      ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
+      : `<span style="font-size:14px">Price on request</span>`;
+    const safeResort = (l['resort'] || '').replace(/'/g, "\\'");
+    const safeDates  = dateStr.replace(/'/g, "\\'");
+    const redweekBtn = redweek
+      ? `<a class="redweek-btn" href="${redweek}" target="_blank" rel="noopener">RedWeek listing ↗</a>`
+      : '';
+    return `
+    <div class="card">
+      <div class="card-thumb ${meta.cls}">${meta.emoji}</div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-resort">${l['resort']}</div>
+          <span class="yr-badge">${l['year']}</span>
+        </div>
+        <div class="card-meta">${loc} · ${l['view']} · ${l['room']}</div>
+        <div class="card-dates"><strong>${dateStr}</strong></div>
+        <div class="card-footer">
+          <div class="card-price">${price}</div>
+          <span class="avail-badge">Available</span>
+        </div>
+        <div class="card-actions">
+          <button class="inquire-btn" onclick="prefill('${safeResort} – ${safeDates}')">Inquire →</button>
+          ${redweekBtn}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('dest-filters').addEventListener('click', e => {
+  if (!e.target.dataset.dest) return;
+  activeFilters.dest = e.target.dataset.dest;
+  document.querySelectorAll('[data-dest]').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active'); render();
+});
+document.getElementById('year-filters').addEventListener('click', e => {
+  if (!e.target.dataset.year) return;
+  activeFilters.year = e.target.dataset.year;
+  document.querySelectorAll('[data-year]').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active'); render();
+});
+document.getElementById('month-filters').addEventListener('click', e => {
+  if (!e.target.dataset.month) return;
+  activeFilters.month = e.target.dataset.month;
+  document.querySelectorAll('[data-month]').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active'); render();
+});
+
+function prefill(label) {
+  document.getElementById('f-week').value = label;
+  document.querySelector('.contact-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => document.getElementById('f-name').focus(), 400);
+}
+
+function sendInquiry() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const week  = document.getElementById('f-week').value;
+  const msg   = document.getElementById('f-msg').value.trim();
+  const note  = document.getElementById('form-note');
+  if (!name || !email) { note.style.color='#c0392b'; note.textContent='Please enter your name and email.'; return; }
+  const sub  = encodeURIComponent('Vacation Week Rental Inquiry');
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nWeek of interest: ${week||'Not specified'}\n\n${msg}`);
+  window.location.href = `mailto:ourextraweeks@gmail.com?subject=${sub}&body=${body}`;
+  note.style.color = '#3b6d11';
+  note.textContent = '✓ Your email client should open with the inquiry pre-filled. Thank you!';
+  ['f-name','f-email','f-week','f-msg'].forEach(id => document.getElementById(id).value = '');
+}
+
+loadListings();
+</script>
+</body>
+</html>
