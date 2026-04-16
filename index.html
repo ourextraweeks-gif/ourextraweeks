@@ -59,6 +59,17 @@
   .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.25rem; }
   .about-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
 
+  .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
+  .booking-box h2 { font-size: 17px; font-weight: 500; margin-bottom: 1.25rem; }
+  .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
+  .booking-step { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
+  .booking-step .step-num { font-size: 11px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .booking-step .step-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .booking-step .step-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .booking-notes { display: flex; flex-direction: column; gap: 8px; }
+  .booking-note { font-size: 13px; color: var(--text2); padding: 10px 14px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--border2); line-height: 1.6; }
+  .booking-note strong { color: var(--text); font-weight: 500; }
+
   .section-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
 
   .filters { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
@@ -135,6 +146,7 @@
   <a class="nav-brand" href="#">Our Extra Weeks</a>
   <div class="nav-links">
     <a href="#about">Our story</a>
+    <a href="#booking">How it works</a>
     <a href="#listings">Listings</a>
     <a class="nav-cta" href="#contact">Contact us</a>
   </div>
@@ -167,6 +179,38 @@
         <span class="about-pill">2BR lockoff villas</span>
         <span class="about-pill">Maui · Scottsdale · Mexico</span>
       </div>
+    </div>
+  </div>
+
+  <div class="booking-box" id="booking">
+    <h2>📋 How booking works</h2>
+    <div class="booking-steps">
+      <div class="booking-step">
+        <div class="step-num">Step 1</div>
+        <div class="step-title">Express interest</div>
+        <div class="step-desc">Inquire via the form below, by email, or through RedWeek if a listing is posted there.</div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">Step 2</div>
+        <div class="step-title">Sign a contract</div>
+        <div class="step-desc">We'll send a rental agreement to sign. We'll need your full legal name, address as on your ID, email, and phone number — the resort checks photo ID at check-in.</div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">Step 3</div>
+        <div class="step-title">Payment</div>
+        <div class="step-desc">New guests: 50% deposit to confirm, balance due shortly after the reservation is transferred. Returning guests: typically full payment upon transfer.</div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">Step 4</div>
+        <div class="step-title">Reservation transfer</div>
+        <div class="step-desc">We update the reservation into your name directly with the resort. You're all set!</div>
+      </div>
+    </div>
+    <div class="booking-notes">
+      <div class="booking-note"><strong>Payment methods —</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
+      <div class="booking-note"><strong>Cancellation policy —</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
+      <div class="booking-note"><strong>Book via RedWeek —</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available — we update postings as we list.</div>
+      <div class="booking-note"><strong>Resellers welcome —</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
     </div>
   </div>
 
@@ -273,9 +317,7 @@ function parseCSV(text) {
 }
 
 function getLocation(l) {
-  const city = l['location'] || '';
-  const region = l['column 1'] || l['col 1'] || l['state'] || l['country'] || '';
-  return region ? `${city}, ${region}` : city;
+  return l['city'] || l['location'] || '';
 }
 
 function getDateDisplay(l) {
