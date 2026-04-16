@@ -309,10 +309,10 @@
     <h2>Inquire about a week</h2>
     <p class="sub">Fill in the form below and we'll get back to you promptly at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>
     <div class="form-grid">
-      <input type="text" id="f-name" placeholder="Your name" />
-      <input type="email" id="f-email" placeholder="Your email address" />
-      <select id="f-week"><option value="">Select a week you're interested in…</option></select>
-      <textarea id="f-msg" rows="3" placeholder="Any questions or special requests?"></textarea>
+      <input type="text" id="f-name" name="name" placeholder="Your name" />
+      <input type="email" id="f-email" name="email" placeholder="Your email address" />
+      <select id="f-week" name="week"><option value="">Select a week you're interested in…</option></select>
+      <textarea id="f-msg" name="message" rows="3" placeholder="Any questions or special requests?"></textarea>
     </div>
     <button class="send-btn" onclick="sendInquiry()">Send inquiry →</button>
     <p class="form-note" id="form-note"></p>
@@ -557,13 +557,42 @@ function sendInquiry() {
   const week  = document.getElementById('f-week').value;
   const msg   = document.getElementById('f-msg').value.trim();
   const note  = document.getElementById('form-note');
-  if (!name || !email) { note.style.color='#c0392b'; note.textContent='Please enter your name and email.'; return; }
-  const sub  = encodeURIComponent('Vacation Week Rental Inquiry');
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nWeek of interest: ${week||'Not specified'}\n\n${msg}`);
-  window.location.href = `mailto:ourextraweeks@gmail.com?subject=${sub}&body=${body}`;
-  note.style.color = '#3b6d11';
-  note.textContent = '✓ Your email client should open with the inquiry pre-filled. Thank you!';
-  ['f-name','f-email','f-week','f-msg'].forEach(id => document.getElementById(id).value = '');
+
+  if (!name || !email) {
+    note.style.color = '#c0392b';
+    note.textContent = 'Please enter your name and email.';
+    return;
+  }
+
+  const btn = document.querySelector('.send-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  note.textContent = '';
+
+  fetch('https://formspree.io/f/mdayeyeg', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, week: week || 'Not specified', message: msg })
+  })
+  .then(res => res.json().then(data => ({ ok: res.ok, data })))
+  .then(({ ok, data }) => {
+    if (ok) {
+      note.style.color = '#3b6d11';
+      note.textContent = '✓ Your inquiry has been sent! We\'ll be in touch soon.';
+      ['f-name','f-email','f-week','f-msg'].forEach(id => document.getElementById(id).value = '');
+    } else {
+      note.style.color = '#c0392b';
+      note.textContent = data.error || 'Something went wrong. Please email us directly at ourextraweeks@gmail.com.';
+    }
+  })
+  .catch(() => {
+    note.style.color = '#c0392b';
+    note.textContent = 'Something went wrong. Please email us directly at ourextraweeks@gmail.com.';
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send inquiry →';
+  });
 }
 
 loadListings();
