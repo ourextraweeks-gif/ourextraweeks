@@ -347,7 +347,7 @@ async function loadListings() {
     const text = await res.text();
     const parsed = parseCSV(text);
     if (parsed.length === 0) throw new Error('No rows parsed');
-    allListings = parsed;
+    allListings = parsed.filter(r => (r['post'] || '').toLowerCase().trim() === 'yes');
   } catch(e) {
     document.getElementById('grid').innerHTML =
       '<p class="state-msg">Unable to load listings — please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
@@ -396,8 +396,9 @@ function render() {
   allListings.forEach(l => {
     const opt = document.createElement('option');
     const d = getDateDisplay(l);
-    opt.value = `${l['resort']} – ${d}`;
-    opt.textContent = `${l['resort']} · ${d} (${l['year']})`;
+    const ref = l['ref'] ? `[${l['ref']}] ` : '';
+    opt.value = `${l['ref'] ? '[' + l['ref'] + '] ' : ''}${l['resort']} – ${d}`;
+    opt.textContent = `${ref}${l['resort']} · ${d} (${l['year']})`;
     sel.appendChild(opt);
   });
 
@@ -414,8 +415,11 @@ function render() {
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
       : `<span style="font-size:14px">Price on request</span>`;
+    const ref = l['ref'] || '';
+    const safeRef = ref.replace(/'/g, "\\'");
     const safeResort = (l['resort'] || '').replace(/'/g, "\\'");
     const safeDates  = dateStr.replace(/'/g, "\\'");
+    const prefillVal = ref ? `[${safeRef}] ${safeResort} – ${safeDates}` : `${safeResort} – ${safeDates}`;
     const redweekLower = redweek.toLowerCase();
     const notPosted = redweekLower.includes('not posted') || redweekLower.includes('not yet');
     const redweekBtn = notPosted
@@ -431,14 +435,14 @@ function render() {
           <div class="card-resort">${l['resort']}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${loc} · ${l['view']} · ${l['room']}</div>
+        <div class="card-meta">${loc} · ${l['view']} · ${l['room']}${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
         <div class="card-dates"><strong>${dateStr}</strong></div>
         <div class="card-footer">
           <div class="card-price">${price}</div>
           <span class="avail-badge">Available</span>
         </div>
         <div class="card-actions">
-          <button class="inquire-btn" onclick="prefill('${safeResort} – ${safeDates}')">Inquire →</button>
+          <button class="inquire-btn" onclick="prefill('${prefillVal}')">Inquire →</button>
           ${redweekBtn}
         </div>
       </div>
