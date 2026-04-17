@@ -396,17 +396,17 @@ function getMonth(l) {
 
 function getResortInfo(l) {
   const key = (l['resort'] || '').toLowerCase().trim();
-  // Try exact match first, then partial
   if (resortInfo[key]) return resortInfo[key];
   const found = Object.keys(resortInfo).find(k => k.includes(key) || key.includes(k));
   return found ? resortInfo[found] : {};
 }
+
+function getRedweek(l) {
   const val = l['redweek'] || l['redweek url'] || l['redweek_url'] || '';
   if (!val) return '';
   const lower = val.toLowerCase();
   if (lower.startsWith('http')) return val;
   if (lower.includes('not posted') || lower.includes('not yet')) return val;
-  // Just an ID like R1416182 — prepend the base URL
   return `https://www.redweek.com/posting/${val.trim()}`;
 }
 
