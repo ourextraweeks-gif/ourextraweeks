@@ -510,6 +510,7 @@ function render() {
     const resort = getResortInfo(l);
     const room = l['type'] || l['room'] || resort['room type'] || resort['room'] || '2BR';
     const bath = resort['bath'] || '2';
+    const occupancy = resort['occupancy'] || l['sleeps'] || '';
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
@@ -530,14 +531,14 @@ function render() {
     <div class="card">
       <div class="card-thumb ${cls}">
         <span class="card-thumb-emoji">${emoji}</span>
-        <span class="card-thumb-name">${l['resort']}</span>
+        <span class="card-thumb-name">${l['resort']}${loc ? ` (${loc})` : ''}</span>
       </div>
       <div class="card-body">
         <div class="card-top">
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${loc} · ${l['view']} · ${room} · ${bath} bath${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
+        <div class="card-meta">${l['view']} · ${room} · ${bath} bath · max ${occupancy}${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
         <div class="card-footer">
           <div class="card-price">${price}</div>
           <span class="avail-badge">Available</span>
