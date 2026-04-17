@@ -108,7 +108,8 @@
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
   .card-date { font-size: 17px; font-weight: 500; line-height: 1.3; }
   .yr-badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: var(--bg2); color: var(--text3); font-weight: 500; white-space: nowrap; flex-shrink: 0; margin-left: 8px; margin-top: 3px; }
-  .card-meta { font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+  .card-meta { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+  .card-ref { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
   .card-price { font-size: 17px; font-weight: 500; }
   .card-price sub { font-size: 12px; font-weight: 400; color: var(--text2); }
@@ -500,7 +501,7 @@ function render() {
   grid.innerHTML = visible.map(l => {
     const resortLower = (l['resort'] || '').toLowerCase();
     let emoji, cls;
-    if (resortLower.includes('north')) {
+    if (resortLower.includes('kaanapali') && resortLower.includes('north')) {
       emoji = '\uD83C\uDF3A'; cls = 'maui-n';      // 🌺
     } else if (resortLower.includes('kaanapali')) {
       emoji = '\uD83D\uDC0B'; cls = 'maui-s';      // 🐋
@@ -544,7 +545,8 @@ function render() {
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${l['view']} · ${room} · ${bath} bath · max ${occupancy}${ref ? ` · <span style="color:var(--text3)">Ref: ${ref}</span>` : ''}</div>
+        <div class="card-meta">${l['view']} · ${room} · ${bath} bath${occupancy ? ` · sleeps ${occupancy}` : ''}</div>
+        ${ref ? `<div class="card-ref">Ref: ${ref}</div>` : ''}
         <div class="card-footer">
           <div class="card-price">${price}</div>
           <span class="avail-badge">Available</span>
