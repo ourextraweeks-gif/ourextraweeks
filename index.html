@@ -501,9 +501,13 @@ function render() {
   grid.innerHTML = visible.map(l => {
     const resortLower = (l['resort'] || '').toLowerCase();
     let emoji, cls;
-    if (resortLower.includes('kaanapali') && resortLower.includes('north')) {
+    if (resortLower.includes('ka\u2019anapali') && resortLower.includes('north') ||
+        resortLower.includes('ka\'anapali') && resortLower.includes('north') ||
+        resortLower.includes('kaanapali') && resortLower.includes('north')) {
       emoji = '\uD83C\uDF3A'; cls = 'maui-n';      // 🌺
-    } else if (resortLower.includes('kaanapali')) {
+    } else if (resortLower.includes('ka\u2019anapali') ||
+               resortLower.includes('ka\'anapali') ||
+               resortLower.includes('kaanapali')) {
       emoji = '\uD83D\uDC0B'; cls = 'maui-s';      // 🐋
     } else if (resortLower.includes('kierland')) {
       emoji = '\uD83C\uDF35'; cls = 'kierland';    // 🌵
@@ -518,6 +522,7 @@ function render() {
     const room = resort['room'] || l['type'] || '2BR';
     const bath = resort['bath'] || '2';
     const occupancy = resort['sleeps'] || l['sleeps'] || '';
+    const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : room;
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
@@ -545,7 +550,7 @@ function render() {
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${l['view']} · ${room} · ${bath} bath${occupancy ? ` · sleeps ${occupancy}` : ''}</div>
+        <div class="card-meta">${l['view']} · ${roomDisplay} · ${bath} bath${occupancy ? ` · sleeps ${occupancy}` : ''}</div>
         ${ref ? `<div class="card-ref">Ref: ${ref}</div>` : ''}
         <div class="card-footer">
           <div class="card-price">${price}</div>
