@@ -395,10 +395,19 @@ function getMonth(l) {
 }
 
 function getResortInfo(l) {
-  const key = (l['resort'] || '').toLowerCase().trim();
-  if (resortInfo[key]) return resortInfo[key];
-  const found = Object.keys(resortInfo).find(k => k.includes(key) || key.includes(k));
-  return found ? resortInfo[found] : {};
+  const resortKey = (l['resort'] || '').toLowerCase().trim();
+  const typeKey = (l['type'] || '').toLowerCase().trim();
+  // Try exact match on both resort + type
+  const exactMatch = Object.values(resortInfo).find(r =>
+    (r['resort'] || '').toLowerCase().trim() === resortKey &&
+    (r['type'] || '').toLowerCase().trim() === typeKey
+  );
+  if (exactMatch) return exactMatch;
+  // Fall back to resort name only
+  const nameMatch = Object.values(resortInfo).find(r =>
+    (r['resort'] || '').toLowerCase().trim() === resortKey
+  );
+  return nameMatch || {};
 }
 
 function getRedweek(l) {
@@ -419,12 +428,9 @@ async function loadListings() {
     if (!res1.ok) throw new Error(`HTTP ${res1.status}`);
     const [text1, text2] = await Promise.all([res1.text(), res2.text()]);
 
-    // Parse resort info into a lookup map
+    // Parse resort info into an array for multi-column matching
     const resorts = parseCSV(text2);
-    resorts.forEach(r => {
-      const key = (r['resort'] || '').toLowerCase().trim();
-      if (key) resortInfo[key] = r;
-    });
+    resorts.forEach(r => { resortInfo[Object.keys(resortInfo).length] = r; });
 
     const parsed = parseCSV(text1);
     if (parsed.length === 0) throw new Error('No rows parsed');
@@ -508,9 +514,9 @@ function render() {
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
     const resort = getResortInfo(l);
-    const room = l['type'] || l['room'] || resort['room type'] || resort['room'] || '2BR';
+    const room = resort['room'] || l['type'] || '2BR';
     const bath = resort['bath'] || '2';
-    const occupancy = resort['occupancy'] || l['sleeps'] || '';
+    const occupancy = resort['sleeps'] || l['sleeps'] || '';
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
