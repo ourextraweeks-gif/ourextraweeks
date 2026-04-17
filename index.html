@@ -428,7 +428,10 @@ async function loadListings() {
 
     const parsed = parseCSV(text1);
     if (parsed.length === 0) throw new Error('No rows parsed');
-    allListings = parsed.filter(r => (r['status'] || '').toLowerCase().trim() === 'available');
+    allListings = parsed.filter(r => {
+      const s = (r['status'] || '').toLowerCase().trim();
+      return s === 'available';
+    });
   } catch(e) {
     document.getElementById('grid').innerHTML =
       '<p class="state-msg">Unable to load listings — please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
@@ -505,8 +508,8 @@ function render() {
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
     const resort = getResortInfo(l);
-    const room = l['room'] || resort['room type'] || resort['room'] || '2BR';
-    const bath = l['bath'] || resort['bath'] || resort['bathrooms'] || '2';
+    const room = l['type'] || l['room'] || resort['room type'] || resort['room'] || '2BR';
+    const bath = resort['bath'] || '2';
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
