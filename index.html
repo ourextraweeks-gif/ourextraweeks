@@ -29,69 +29,69 @@
     }
   }
 
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg3); color: var(--text); line-height: 1.6; min-height: 100vh; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg3); color: var(--text); line-height: 1.7; min-height: 100vh; font-size: 17px; }
   a { color: var(--info-text); }
 
-  nav { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 10; }
-  .nav-brand { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
+  nav { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 10; }
+  .nav-brand { font-size: 17px; font-weight: 500; color: var(--text); text-decoration: none; }
   .nav-links { display: flex; align-items: center; gap: 1.5rem; }
-  .nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; }
+  .nav-links a { font-size: 15px; color: var(--text2); text-decoration: none; }
   .nav-links a:hover { color: var(--text); }
-  .nav-cta { font-size: 13px; padding: 6px 14px; border-radius: 8px; border: 0.5px solid var(--border2); color: var(--text); text-decoration: none; transition: background 0.12s; }
+  .nav-cta { font-size: 15px; padding: 8px 16px; border-radius: 8px; border: 0.5px solid var(--border2); color: var(--text); text-decoration: none; transition: background 0.12s; }
   .nav-cta:hover { background: var(--bg2); color: var(--text) !important; }
 
   .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
   .hero { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem 2rem; margin-bottom: 2rem; }
-  .hero-tag { font-size: 11px; font-weight: 500; background: var(--info-bg); color: var(--info-text); display: inline-block; padding: 4px 12px; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
-  .hero h1 { font-size: 28px; font-weight: 500; margin-bottom: 0.5rem; }
-  .hero p { font-size: 15px; color: var(--text2); max-width: 580px; }
+  .hero-tag { font-size: 13px; font-weight: 500; background: var(--info-bg); color: var(--info-text); display: inline-block; padding: 4px 12px; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .hero h1 { font-size: 32px; font-weight: 500; margin-bottom: 0.5rem; }
+  .hero p { font-size: 17px; color: var(--text2); max-width: 580px; }
   .hero-stats { display: flex; gap: 12px; margin-top: 1.5rem; flex-wrap: wrap; }
   .stat-pill { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 18px; }
-  .stat-pill .slabel { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
-  .stat-pill .sval { font-size: 20px; font-weight: 500; }
+  .stat-pill .slabel { font-size: 13px; color: var(--text3); margin-bottom: 2px; }
+  .stat-pill .sval { font-size: 22px; font-weight: 500; }
 
   .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
-  .about-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
-  .about-content h2 { font-size: 17px; font-weight: 500; margin-bottom: 0.6rem; }
-  .about-content p { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 0.65rem; }
+  .about-icon { font-size: 36px; flex-shrink: 0; margin-top: 2px; }
+  .about-content h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.6rem; }
+  .about-content p { font-size: 16px; color: var(--text2); line-height: 1.8; margin-bottom: 0.65rem; }
   .about-content p:last-of-type { margin-bottom: 0.75rem; }
   .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.25rem; }
-  .about-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
+  .about-pill { font-size: 14px; padding: 5px 14px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
 
   .resorts-section { margin-bottom: 2rem; }
-  .resorts-section h2 { font-size: 17px; font-weight: 500; margin-bottom: 1rem; }
+  .resorts-section h2 { font-size: 20px; font-weight: 500; margin-bottom: 1rem; }
   .resort-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
   .resort-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; display: flex; flex-direction: column; }
   .resort-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .resort-card-thumb { height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .resort-card-thumb { height: 56px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
   .resort-card-body { padding: 0.5rem 0.75rem 0.75rem; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .resort-card-name { font-size: 11px; font-weight: 500; line-height: 1.4; }
-  .resort-card-loc { font-size: 11px; color: var(--text2); }
-  .resort-card-link { font-size: 11px; color: var(--info-text); margin-top: 4px; }
+  .resort-card-name { font-size: 13px; font-weight: 500; line-height: 1.4; }
+  .resort-card-loc { font-size: 13px; color: var(--text2); }
+  .resort-card-link { font-size: 13px; color: var(--info-text); margin-top: 4px; }
 
   .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
-  .booking-box h2 { font-size: 17px; font-weight: 500; margin-bottom: 1.25rem; }
+  .booking-box h2 { font-size: 20px; font-weight: 500; margin-bottom: 1.25rem; }
   .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
   .booking-step { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
-  .booking-step .step-num { font-size: 11px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .booking-step .step-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-  .booking-step .step-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .booking-step .step-num { font-size: 13px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .booking-step .step-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .booking-step .step-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
   .booking-notes { display: flex; flex-direction: column; gap: 8px; }
-  .booking-note { font-size: 13px; color: var(--text2); padding: 10px 14px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--border2); line-height: 1.6; }
+  .booking-note { font-size: 15px; color: var(--text2); padding: 12px 16px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--border2); line-height: 1.7; }
   .booking-note strong { color: var(--text); font-weight: 500; }
 
-  .section-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-label { font-size: 13px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
 
   .filters { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
   .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .filter-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; min-width: 90px; width: 90px; flex-shrink: 0; }
+  .filter-label { font-size: 13px; font-weight: 500; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; min-width: 90px; width: 90px; flex-shrink: 0; }
   .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
-  .fbtn { padding: 5px 14px; font-size: 13px; border-radius: 20px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; white-space: nowrap; }
+  .fbtn { padding: 7px 16px; font-size: 15px; border-radius: 20px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; white-space: nowrap; }
   .fbtn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
   .fbtn:hover:not(.active) { background: var(--bg3); color: var(--text); }
 
-  .result-count { font-size: 13px; color: var(--text3); margin-bottom: 1rem; }
+  .result-count { font-size: 15px; color: var(--text3); margin-bottom: 1rem; }
 
   .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
 
@@ -102,46 +102,46 @@
   .card-thumb.maui-s { background: var(--teal-bg); }
   .card-thumb.kierland { background: var(--amber-bg); }
   .card-thumb.garza { background: var(--coral-bg); }
-  .card-thumb-emoji { font-size: 22px; flex-shrink: 0; }
-  .card-thumb-name { font-size: 12px; font-weight: 500; line-height: 1.4; color: var(--text); }
+  .card-thumb-emoji { font-size: 26px; flex-shrink: 0; }
+  .card-thumb-name { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--text); }
   .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .card-date { font-size: 17px; font-weight: 500; line-height: 1.3; }
-  .yr-badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: var(--bg2); color: var(--text3); font-weight: 500; white-space: nowrap; flex-shrink: 0; margin-left: 8px; margin-top: 3px; }
-  .card-meta { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
-  .card-ref { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .card-date { font-size: 19px; font-weight: 500; line-height: 1.3; }
+  .yr-badge { font-size: 13px; padding: 3px 8px; border-radius: 6px; background: var(--bg2); color: var(--text3); font-weight: 500; white-space: nowrap; flex-shrink: 0; margin-left: 8px; margin-top: 3px; }
+  .card-meta { font-size: 14px; color: var(--text2); margin-bottom: 4px; }
+  .card-ref { font-size: 13px; color: var(--text3); margin-bottom: 8px; }
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-  .card-price { font-size: 17px; font-weight: 500; }
-  .card-price sub { font-size: 12px; font-weight: 400; color: var(--text2); }
-  .avail-badge { font-size: 11px; padding: 3px 9px; border-radius: 6px; background: var(--success-bg); color: var(--success-text); font-weight: 500; }
+  .card-price { font-size: 19px; font-weight: 500; }
+  .card-price sub { font-size: 14px; font-weight: 400; color: var(--text2); }
+  .avail-badge { font-size: 13px; padding: 4px 10px; border-radius: 6px; background: var(--success-bg); color: var(--success-text); font-weight: 500; }
   .card-actions { display: flex; gap: 8px; margin-top: 12px; }
-  .inquire-btn { flex: 1; padding: 9px; font-size: 13px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; transition: background 0.12s; font-family: inherit; }
+  .inquire-btn { flex: 1; padding: 11px; font-size: 15px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; transition: background 0.12s; font-family: inherit; }
   .inquire-btn:hover { background: var(--bg2); }
-  .redweek-btn { flex: 1; padding: 9px; font-size: 13px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--info-text); text-decoration: none; display: flex; align-items: center; justify-content: center; transition: background 0.12s; }
+  .redweek-btn { flex: 1; padding: 11px; font-size: 15px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--info-text); text-decoration: none; display: flex; align-items: center; justify-content: center; transition: background 0.12s; }
   .redweek-btn:hover { background: var(--info-bg); }
-  .redweek-pending { font-size: 11px; color: var(--text3); margin-top: 6px; display: block; }
+  .redweek-pending { font-size: 13px; color: var(--text3); margin-top: 6px; display: block; }
 
-  .state-msg { color: var(--text2); font-size: 14px; padding: 1.5rem 0; }
+  .state-msg { color: var(--text2); font-size: 16px; padding: 1.5rem 0; }
   .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--text); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .contact-box { margin-top: 2.5rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; }
-  .contact-box h2 { font-size: 18px; font-weight: 500; margin-bottom: 0.4rem; }
-  .contact-box .sub { font-size: 14px; color: var(--text2); margin-bottom: 1.25rem; }
+  .contact-box h2 { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
+  .contact-box .sub { font-size: 16px; color: var(--text2); margin-bottom: 1.25rem; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .form-grid input, .form-grid textarea, .form-grid select { width: 100%; padding: 9px 13px; font-size: 14px; border: 0.5px solid var(--border2); border-radius: 8px; background: var(--bg2); color: var(--text); font-family: inherit; outline: none; transition: border-color 0.12s; }
+  .form-grid input, .form-grid textarea, .form-grid select { width: 100%; padding: 11px 15px; font-size: 16px; border: 0.5px solid var(--border2); border-radius: 8px; background: var(--bg2); color: var(--text); font-family: inherit; outline: none; transition: border-color 0.12s; }
   .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus { border-color: var(--text); }
   .form-grid textarea { grid-column: 1/-1; resize: vertical; }
   .form-grid select { grid-column: 1/-1; }
-  .send-btn { padding: 10px 28px; font-size: 14px; border-radius: 8px; border: none; background: var(--text); color: var(--bg); cursor: pointer; font-family: inherit; transition: opacity 0.12s; }
+  .send-btn { padding: 13px 32px; font-size: 16px; border-radius: 8px; border: none; background: var(--text); color: var(--bg); cursor: pointer; font-family: inherit; transition: opacity 0.12s; }
   .send-btn:hover { opacity: 0.85; }
-  .form-note { font-size: 12px; color: var(--text3); margin-top: 10px; }
+  .form-note { font-size: 14px; color: var(--text3); margin-top: 10px; }
 
-  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text3); border-top: 0.5px solid var(--border); margin-top: 3rem; }
+  footer { text-align: center; padding: 2rem; font-size: 14px; color: var(--text3); border-top: 0.5px solid var(--border); margin-top: 3rem; }
 
   @media (max-width: 640px) {
     .hero { padding: 1.5rem 1.25rem; }
-    .hero h1 { font-size: 22px; }
+    .hero h1 { font-size: 26px; }
     .about-box { flex-direction: column; gap: 0.75rem; }
     .form-grid { grid-template-columns: 1fr; }
     .form-grid textarea, .form-grid select { grid-column: 1; }
@@ -175,23 +175,6 @@
       <div class="stat-pill"><div class="slabel">Available weeks</div><div class="sval" id="avail-count">—</div></div>
       <div class="stat-pill"><div class="slabel">Destinations</div><div class="sval">4</div></div>
       <div class="stat-pill"><div class="slabel">Unit type</div><div class="sval">2BR</div></div>
-    </div>
-  </div>
-
-  <div class="about-box" id="about">
-    <div class="about-icon">🏝️</div>
-    <div class="about-content">
-      <h2>How we ended up with too much of a good thing</h2>
-      <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts — Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta and Cancun. We love every one of them. The problem is, there are only so many weeks in a year.</p>
-      <p>Rather than let these weeks sit unused, we rent them out to fellow travellers who want a luxury resort experience without the ownership commitment. You get a stunning 2-bedroom villa at a top-tier resort; we get to feel slightly better about our timeshare habit. Everyone wins.</p>
-      <p>We handle the name-change paperwork and reservation transfer ourselves — no third-party broker fees, no markups. You're dealing directly with the owners, so communication is fast and personal.</p>
-      <div class="about-pills">
-        <span class="about-pill">No broker fees</span>
-        <span class="about-pill">Direct from owners</span>
-        <span class="about-pill">Westin &amp; Tafer resorts</span>
-        <span class="about-pill">2BR lockoff villas</span>
-        <span class="about-pill">Maui · Scottsdale · Mexico</span>
-      </div>
     </div>
   </div>
 
@@ -317,6 +300,23 @@
     </div>
     <button class="send-btn" onclick="sendInquiry()">Send inquiry →</button>
     <p class="form-note" id="form-note"></p>
+  </div>
+
+  <div class="about-box" id="about">
+    <div class="about-icon">🏝️</div>
+    <div class="about-content">
+      <h2>How we ended up with too much of a good thing</h2>
+      <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts — Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta and Cancun. We love every one of them. The problem is, there are only so many weeks in a year.</p>
+      <p>Rather than let these weeks sit unused, we rent them out to fellow travellers who want a luxury resort experience without the ownership commitment. You get a stunning 2-bedroom villa at a top-tier resort; we get to feel slightly better about our timeshare habit. Everyone wins.</p>
+      <p>We handle the name-change paperwork and reservation transfer ourselves — no third-party broker fees, no markups. You're dealing directly with the owners, so communication is fast and personal.</p>
+      <div class="about-pills">
+        <span class="about-pill">No broker fees</span>
+        <span class="about-pill">Direct from owners</span>
+        <span class="about-pill">Westin &amp; Tafer resorts</span>
+        <span class="about-pill">2BR lockoff villas</span>
+        <span class="about-pill">Maui · Scottsdale · Mexico</span>
+      </div>
+    </div>
   </div>
 
 </div>
