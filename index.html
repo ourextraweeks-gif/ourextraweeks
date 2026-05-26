@@ -74,12 +74,12 @@
 
   .resorts-section { margin-bottom: 2rem; }
   .resorts-section h2 { font-size: 20px; font-weight: 500; margin-bottom: 1rem; }
-  .resort-info-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .resort-info { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 0.9rem 1.1rem; }
-  .resort-info-head { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .resort-intro { margin: 0.25rem 0 0.85rem; }
+  .resort-intro-head { font-size: 16px; font-weight: 600; margin-bottom: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .rating-badge { font-size: 12px; font-weight: 500; color: var(--info-text); background: var(--info-bg); padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
-  .resort-info-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
-  .resort-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .resort-intro-desc { font-size: 14px; color: var(--text2); line-height: 1.6; max-width: 720px; }
+  .resort-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .resort-cards:last-child { margin-bottom: 0; }
   .resort-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; display: flex; flex-direction: column; }
   .resort-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   .resort-card-thumb { height: 56px; display: flex; align-items: center; justify-content: center; font-size: 26px; border-bottom: 3px solid transparent; }
@@ -179,7 +179,6 @@
     .filter-label { min-width: 56px; }
     .card-actions { flex-direction: column; }
     .resort-cards { grid-template-columns: repeat(2, 1fr); }
-    .resort-info-strip { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -228,15 +227,9 @@
 
   <div class="resorts-section">
     <div class="section-label">Our resorts</div>
-    <div class="resort-info-strip">
-      <div class="resort-info">
-        <div class="resort-info-head">Westin resorts <span class="rating-badge">◆ AAA Four Diamond</span></div>
-        <div class="resort-info-desc">Marriott Bonvoy timeshare villas with full kitchens, signature Heavenly beds, multiple pools, and full resort amenities.</div>
-      </div>
-      <div class="resort-info">
-        <div class="resort-info-head">Garza Blanca <span class="rating-badge">◆ AAA Four Diamond · Puerto Vallarta</span></div>
-        <div class="resort-info-desc">TAFER's AAA Four Diamond resort in Puerto Vallarta, plus five-star luxury beachfront resorts in Cancún and Los Cabos, with gourmet dining, spa, and attentive service.</div>
-      </div>
+    <div class="resort-intro">
+      <div class="resort-intro-head">Westin resorts <span class="rating-badge">◆ AAA Four Diamond</span></div>
+      <div class="resort-intro-desc">Marriott Bonvoy timeshare villas with full kitchens, signature Heavenly beds, multiple pools, and full resort amenities.</div>
     </div>
     <div class="resort-cards">
       <a class="resort-card" href="https://www.marriott.com/en-us/hotels/oggws-the-westin-kaanapali-ocean-resort-villas/overview/" target="_blank" rel="noopener">
@@ -263,6 +256,12 @@
           <div class="resort-card-link">View resort ↗</div>
         </div>
       </a>
+    </div>
+    <div class="resort-intro">
+      <div class="resort-intro-head">Garza Blanca <span class="rating-badge">◆ AAA Four Diamond · Puerto Vallarta</span></div>
+      <div class="resort-intro-desc">TAFER's AAA Four Diamond resort in Puerto Vallarta, plus five-star luxury beachfront resorts in Cancún and Los Cabos, with gourmet dining, spa, and attentive service.</div>
+    </div>
+    <div class="resort-cards">
       <a class="resort-card" href="https://www.garzablancaresort.com/puerto-vallarta" target="_blank" rel="noopener">
         <div class="resort-card-thumb vallarta">🌅</div>
         <div class="resort-card-body">
