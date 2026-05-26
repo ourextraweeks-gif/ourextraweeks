@@ -4,150 +4,387 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Our Extra Weeks | Vacation Rentals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #ffffff; --bg2: #f7f6f3; --bg3: #f0efe9;
-    --text: #1a1a1a; --text2: #5a5a56; --text3: #9a9994;
-    --border: rgba(0,0,0,0.1); --border2: rgba(0,0,0,0.18);
-    --radius: 10px; --radius-lg: 14px;
-    --success-bg: #eaf3de; --success-text: #3b6d11;
-    --info-bg: #e6f1fb; --info-text: #185fa5;
-    --amber-bg: #faeeda; --teal-bg: #e1f5ee;
-    --blue-bg: #e6f1fb; --coral-bg: #faece7;
+    --bg: #ffffff; --bg2: #eef4fa; --bg3: #e0eaf4;
+    --text: #1c2733; --text2: #51606f; --text3: #8b9bab;
+    --border: rgba(28,39,51,0.10); --border2: rgba(28,39,51,0.16);
+    --radius: 12px; --radius-lg: 18px; --radius-xl: 24px;
+    --accent: #4a90c4; --accent-soft: #d8e8f4; --accent-deep: #2f6a99;
+    --coral: #6fa8cc; --gold: #c2a368;
+    --success-bg: #dcecdf; --success-text: #406a48;
+    --info-bg: #d8e8f4; --info-text: #2f6a99;
+    --amber-bg: #efe7d4; --teal-bg: #d8eaea;
+    --blue-bg: #d8e8f4; --coral-bg: #e3edf4;
+    /* per-resort card tints */
+    --r-maui-s: #cfe9e4; --r-maui-s-edge: #379b8a;
+    --r-maui-n: #d8eccf; --r-maui-n-edge: #6aa641;
+    --r-kierland: #f1e2c4; --r-kierland-edge: #c79336;
+    --r-vallarta: #f6d9e4; --r-vallarta-edge: #d2598c;
+    --r-cancun: #f8ddcb; --r-cancun-edge: #df7a3c;
+    --r-cabos: #e6dcf1; --r-cabos-edge: #8a5fc0;
+    --shadow-sm: 0 1px 2px rgba(28,39,51,0.04), 0 2px 8px rgba(28,39,51,0.05);
+    --shadow-md: 0 4px 12px rgba(28,39,51,0.08), 0 12px 32px rgba(28,39,51,0.10);
+    --shadow-lg: 0 8px 24px rgba(28,39,51,0.12), 0 24px 60px rgba(28,39,51,0.14);
+    --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b;
-      --text: #f0efe9; --text2: #a0a09a; --text3: #6a6a64;
-      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
-      --success-bg: #173404; --success-text: #c0dd97;
-      --info-bg: #042c53; --info-text: #b5d4f4;
-      --amber-bg: #412402; --teal-bg: #04342c;
-      --blue-bg: #042c53; --coral-bg: #4a1b0c;
+      --bg: #1a2029; --bg2: #232b37; --bg3: #12161d;
+      --text: #e9eef4; --text2: #9eadbf; --text3: #677687;
+      --border: rgba(255,255,255,0.09); --border2: rgba(255,255,255,0.16);
+      --accent: #6cb0de; --accent-soft: #1f3650; --accent-deep: #9cccec;
+      --coral: #7fb4d6; --gold: #cdb27e;
+      --success-bg: #1c3322; --success-text: #98cba4;
+      --info-bg: #1f3650; --info-text: #9cccec;
+      --amber-bg: #34301f; --teal-bg: #1d3536;
+      --blue-bg: #1f3650; --coral-bg: #25333f;
+      /* per-resort card tints */
+      --r-maui-s: #123430; --r-maui-s-edge: #3fb5a1;
+      --r-maui-n: #1f3318; --r-maui-n-edge: #7cbf52;
+      --r-kierland: #3a2f12; --r-kierland-edge: #d8a843;
+      --r-vallarta: #3d2330; --r-vallarta-edge: #e0709d;
+      --r-cancun: #3c2716; --r-cancun-edge: #ec8c4e;
+      --r-cabos: #2c2440; --r-cabos-edge: #a079d6;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.25);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.45), 0 24px 60px rgba(0,0,0,0.5);
     }
   }
 
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg3); color: var(--text); line-height: 1.7; min-height: 100vh; font-size: 17px; }
-  a { color: var(--info-text); }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans); background: var(--bg3); color: var(--text);
+    line-height: 1.7; min-height: 100vh; font-size: 17px; font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 12% 0%, rgba(74,144,196,0.12), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 95% 5%, rgba(74,144,196,0.07), transparent 70%);
+    background-attachment: fixed;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
 
-  nav { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 10; }
-  .nav-brand { font-size: 17px; font-weight: 500; color: var(--text); text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 1.5rem; }
-  .nav-links a { font-size: 15px; color: var(--text2); text-decoration: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .rise { opacity: 0; animation: rise 0.7s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+  .rise-1 { animation-delay: 0.05s; } .rise-2 { animation-delay: 0.13s; }
+  .rise-3 { animation-delay: 0.21s; } .rise-4 { animation-delay: 0.29s; }
+
+  nav {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; position: sticky; top: 0; z-index: 20;
+  }
+  .nav-brand { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .nav-brand::before { content: '✦'; color: var(--accent); margin-right: 7px; font-size: 16px; }
+  .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+  .nav-links a { font-size: 15px; color: var(--text2); position: relative; transition: color 0.15s; }
+  .nav-links a:not(.nav-cta)::after {
+    content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 1.5px;
+    background: var(--accent); transition: width 0.22s ease;
+  }
+  .nav-links a:not(.nav-cta):hover::after { width: 100%; }
   .nav-links a:hover { color: var(--text); }
-  .nav-cta { font-size: 15px; padding: 8px 16px; border-radius: 8px; border: 0.5px solid var(--border2); color: var(--text); text-decoration: none; transition: background 0.12s; }
-  .nav-cta:hover { background: var(--bg2); color: var(--text) !important; }
+  .nav-cta {
+    font-size: 15px; padding: 9px 18px; border-radius: 999px;
+    background: var(--accent); color: #fff; transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: #fff !important; transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
-  .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-  .hero { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem 2rem; margin-bottom: 2rem; }
-  .hero-tag { font-size: 13px; font-weight: 500; background: var(--info-bg); color: var(--info-text); display: inline-block; padding: 4px 12px; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
-  .hero h1 { font-size: 32px; font-weight: 500; margin-bottom: 0.5rem; }
-  .hero p { font-size: 17px; color: var(--text2); max-width: 580px; }
-  .hero-stats { display: flex; gap: 12px; margin-top: 1.5rem; flex-wrap: wrap; }
-  .stat-pill { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 18px; }
-  .stat-pill .slabel { font-size: 13px; color: var(--text3); margin-bottom: 2px; }
-  .stat-pill .sval { font-size: 22px; font-weight: 500; }
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border); border-radius: var(--radius-xl);
+    padding: 3.5rem 2.75rem 3rem; margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-md);
+    background-color: var(--accent-deep);
+    background-image:
+      linear-gradient(150deg, rgba(33,76,112,0.95) 0%, rgba(74,144,196,0.85) 50%, rgba(135,190,224,0.62) 100%);
+    background-size: cover; background-position: center;
+  }
+  /* When a hero photo is set: <div class="hero" style="--hero-img:url('...')"> */
+  .hero::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image: var(--hero-img, none); background-size: cover; background-position: center;
+    opacity: 0.55; mix-blend-mode: overlay;
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(160deg, rgba(18,34,48,0.5), rgba(18,34,48,0.1) 60%, rgba(18,34,48,0.4));
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-tag {
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,0.16); color: #fff; backdrop-filter: blur(6px);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 1.25rem;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.22);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 5.5vw, 56px); line-height: 1.04; color: #fff;
+    margin-bottom: 0.7rem; font-weight: 500; letter-spacing: -0.025em;
+  }
+  .hero h1 em {
+    font-style: italic; font-weight: 500; color: #ffd166;
+    text-shadow: 0 1px 18px rgba(255,209,102,0.45);
+  }
+  .hero p { font-size: 18px; color: rgba(255,255,255,0.86); max-width: 600px; line-height: 1.65; }
+  .hero-stats { display: flex; gap: 14px; margin-top: 2rem; flex-wrap: wrap; }
+  .stat-pill {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.20);
+    backdrop-filter: blur(8px); border-radius: var(--radius);
+    padding: 12px 22px; transition: transform 0.18s, background 0.18s;
+  }
+  .stat-pill:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+  .stat-pill .slabel { font-size: 12px; color: rgba(255,255,255,0.72); margin-bottom: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .stat-pill .sval { font-family: var(--serif); font-size: 26px; font-weight: 600; color: #fff; }
 
-  .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
-  .about-icon { font-size: 36px; flex-shrink: 0; margin-top: 2px; }
-  .about-content h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.6rem; }
-  .about-content p { font-size: 16px; color: var(--text2); line-height: 1.8; margin-bottom: 0.65rem; }
-  .about-content p:last-of-type { margin-bottom: 0.75rem; }
-  .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.25rem; }
-  .about-pill { font-size: 14px; padding: 5px 14px; border-radius: 20px; background: var(--bg2); border: 0.5px solid var(--border); color: var(--text2); }
+  /* ABOUT */
+  .about-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
+    padding: 2.5rem 2.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);
+    display: flex; gap: 2rem; align-items: flex-start; position: relative; overflow: hidden;
+  }
+  .about-box::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+    background: linear-gradient(var(--accent), var(--coral));
+  }
+  .about-icon {
+    font-size: 30px; flex-shrink: 0; width: 64px; height: 64px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); border-radius: 50%;
+  }
+  .about-content h2 { font-size: 27px; margin-bottom: 0.85rem; }
+  .about-content p { font-size: 16.5px; color: var(--text2); line-height: 1.82; margin-bottom: 0.7rem; }
+  .about-content p:last-of-type { margin-bottom: 0.9rem; }
+  .about-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.5rem; }
+  .about-pill {
+    font-size: 13.5px; padding: 6px 15px; border-radius: 999px;
+    background: var(--accent-soft); border: 1px solid transparent; color: var(--accent-deep);
+    font-weight: 500;
+  }
 
-  .resorts-section { margin-bottom: 2rem; }
-  .resorts-section h2 { font-size: 20px; font-weight: 500; margin-bottom: 1rem; }
-  .resort-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-  .resort-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; display: flex; flex-direction: column; }
-  .resort-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .resort-card-thumb { height: 56px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
-  .resort-card-body { padding: 0.5rem 0.75rem 0.75rem; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .resort-card-name { font-size: 13px; font-weight: 500; line-height: 1.4; }
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.85rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: ''; width: 22px; height: 1.5px; background: var(--accent); display: inline-block; }
+
+  /* RESORTS */
+  .resorts-section { margin-bottom: 2.5rem; }
+  .resorts-section h2 { font-size: 20px; margin-bottom: 1rem; }
+  .resort-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .resort-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    overflow: hidden; color: var(--text); display: flex; flex-direction: column;
+    transition: transform 0.2s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.2s; box-shadow: var(--shadow-sm);
+  }
+  .resort-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .resort-card-thumb {
+    height: 96px; display: flex; align-items: center; justify-content: center;
+    font-size: 34px; position: relative; background-size: cover; background-position: center;
+  }
+  /* photo support: <div class="resort-card-thumb maui-s" style="--img:url('...')"> */
+  .resort-card-thumb { background-image: var(--img, none); border-bottom: 3px solid transparent; }
+  .resort-card-thumb.maui-s   { background-color: var(--r-maui-s);   border-bottom-color: var(--r-maui-s-edge); }
+  .resort-card-thumb.maui-n   { background-color: var(--r-maui-n);   border-bottom-color: var(--r-maui-n-edge); }
+  .resort-card-thumb.kierland { background-color: var(--r-kierland); border-bottom-color: var(--r-kierland-edge); }
+  .resort-card-thumb.vallarta { background-color: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .resort-card-thumb.cancun   { background-color: var(--r-cancun);   border-bottom-color: var(--r-cancun-edge); }
+  .resort-card-thumb.cabos    { background-color: var(--r-cabos);    border-bottom-color: var(--r-cabos-edge); }
+  /* legacy garza fallback */
+  .resort-card-thumb.garza    { background-color: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .resort-card-body { padding: 0.85rem 1rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .resort-card-name { font-family: var(--serif); font-size: 15px; font-weight: 600; line-height: 1.35; }
   .resort-card-loc { font-size: 13px; color: var(--text2); }
-  .resort-card-link { font-size: 13px; color: var(--info-text); margin-top: 4px; }
+  .resort-card-link { font-size: 13px; color: var(--accent); margin-top: 6px; font-weight: 500; }
 
-  .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
-  .booking-box h2 { font-size: 20px; font-weight: 500; margin-bottom: 1.25rem; }
-  .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
-  .booking-step { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
-  .booking-step .step-num { font-size: 13px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .booking-step .step-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  .booking-step .step-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
-  .booking-notes { display: flex; flex-direction: column; gap: 8px; }
-  .booking-note { font-size: 15px; color: var(--text2); padding: 12px 16px; background: var(--bg2); border-radius: var(--radius); border-left: 3px solid var(--border2); line-height: 1.7; }
-  .booking-note strong { color: var(--text); font-weight: 500; }
+  /* BOOKING */
+  .booking-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl);
+    padding: 2.5rem 2.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);
+  }
+  .booking-box h2 { font-size: 27px; margin-bottom: 1.5rem; }
+  .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-bottom: 1.5rem; }
+  .booking-step {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.35rem 1.3rem; position: relative; transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .booking-step:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+  .booking-step .step-num {
+    font-family: var(--serif); font-size: 13px; font-weight: 600; color: #fff;
+    background: var(--accent); width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 0.7rem;
+    letter-spacing: 0;
+  }
+  .booking-step .step-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; font-family: var(--serif); }
+  .booking-step .step-desc { font-size: 14px; color: var(--text2); line-height: 1.68; }
+  .booking-notes { display: flex; flex-direction: column; gap: 10px; }
+  .booking-note {
+    font-size: 15px; color: var(--text2); padding: 14px 18px; background: var(--bg2);
+    border-radius: var(--radius); border-left: 3px solid var(--accent); line-height: 1.72;
+  }
+  .booking-note strong { color: var(--text); font-weight: 600; }
 
-  .section-label { font-size: 13px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
-
-  .filters { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
-  .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .filter-label { font-size: 13px; font-weight: 500; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; min-width: 90px; width: 90px; flex-shrink: 0; }
-  .filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
-  .fbtn { padding: 7px 16px; font-size: 15px; border-radius: 20px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; white-space: nowrap; }
-  .fbtn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-  .fbtn:hover:not(.active) { background: var(--bg3); color: var(--text); }
+  /* FILTERS */
+  .filters {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 1.2rem 1.4rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .filter-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .filter-label {
+    font-size: 12px; font-weight: 600; color: var(--text3); letter-spacing: 0.10em;
+    text-transform: uppercase; min-width: 90px; width: 90px; flex-shrink: 0;
+  }
+  .filter-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .fbtn {
+    padding: 8px 17px; font-size: 14.5px; border-radius: 999px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--text2); cursor: pointer; font-family: inherit;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.12s; white-space: nowrap;
+  }
+  .fbtn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .fbtn:hover:not(.active) { background: var(--accent-soft); color: var(--accent-deep); border-color: var(--accent-soft); transform: translateY(-1px); }
 
   .result-count { font-size: 15px; color: var(--text3); margin-bottom: 1rem; }
 
-  .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
-
-  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.15s; }
-  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .card-thumb { min-height: 80px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0.85rem 1rem; }
-  .card-thumb.maui-n { background: var(--blue-bg); }
-  .card-thumb.maui-s { background: var(--teal-bg); }
-  .card-thumb.kierland { background: var(--amber-bg); }
-  .card-thumb.garza { background: var(--coral-bg); }
-  .card-thumb-emoji { font-size: 26px; flex-shrink: 0; }
-  .card-thumb-name { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--text); }
-  .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .card-date { font-size: 19px; font-weight: 500; line-height: 1.3; }
-  .yr-badge { font-size: 13px; padding: 3px 8px; border-radius: 6px; background: var(--bg2); color: var(--text3); font-weight: 500; white-space: nowrap; flex-shrink: 0; margin-left: 8px; margin-top: 3px; }
+  /* LISTING CARDS */
+  .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform 0.2s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.2s; box-shadow: var(--shadow-sm);
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+  .card-thumb {
+    min-height: 116px; display: flex; align-items: flex-end; justify-content: flex-start;
+    gap: 10px; padding: 0.9rem 1rem; position: relative; overflow: hidden;
+    background-size: cover; background-position: center;
+  }
+  /* photo support: pass --img via inline style on the .card-thumb */
+  .card-thumb { background-image: var(--img, none); }
+  .card-thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(18,34,48,0.55));
+    opacity: var(--img-overlay, 0);
+  }
+  .card-thumb { border-bottom: 3px solid transparent; }
+  .card-thumb.maui-s   { background-color: var(--r-maui-s);   border-bottom-color: var(--r-maui-s-edge); }
+  .card-thumb.maui-n   { background-color: var(--r-maui-n);   border-bottom-color: var(--r-maui-n-edge); }
+  .card-thumb.kierland { background-color: var(--r-kierland); border-bottom-color: var(--r-kierland-edge); }
+  .card-thumb.vallarta { background-color: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .card-thumb.cancun   { background-color: var(--r-cancun);   border-bottom-color: var(--r-cancun-edge); }
+  .card-thumb.cabos    { background-color: var(--r-cabos);    border-bottom-color: var(--r-cabos-edge); }
+  .card-thumb.garza    { background-color: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .card-thumb-emoji {
+    font-size: 22px; flex-shrink: 0; position: relative; z-index: 1;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.55); border-radius: 50%; backdrop-filter: blur(4px);
+  }
+  .card-thumb-name { font-family: var(--serif); font-size: 14.5px; font-weight: 600; line-height: 1.35; color: var(--text); position: relative; z-index: 1; }
+  .card-body { padding: 1.15rem; flex: 1; display: flex; flex-direction: column; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 9px; }
+  .card-date { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+  .yr-badge {
+    font-size: 12.5px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft);
+    color: var(--accent-deep); font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    margin-left: 8px; margin-top: 3px;
+  }
   .card-meta { font-size: 14px; color: var(--text2); margin-bottom: 4px; }
-  .card-ref { font-size: 13px; color: var(--text3); margin-bottom: 8px; }
+  .card-ref { font-size: 12.5px; color: var(--text3); margin-bottom: 9px; letter-spacing: 0.02em; }
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-  .card-price { font-size: 19px; font-weight: 500; }
-  .card-price sub { font-size: 14px; font-weight: 400; color: var(--text2); }
-  .avail-badge { font-size: 13px; padding: 4px 10px; border-radius: 6px; background: var(--success-bg); color: var(--success-text); font-weight: 500; }
-  .card-actions { display: flex; gap: 8px; margin-top: 12px; }
-  .inquire-btn { flex: 1; padding: 11px; font-size: 15px; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; transition: background 0.12s; font-family: inherit; }
-  .inquire-btn:hover { background: var(--bg2); }
-  .redweek-btn { flex: 1; padding: 11px; font-size: 13px; white-space: nowrap; border-radius: 8px; border: 0.5px solid var(--border2); background: transparent; color: var(--info-text); text-decoration: none; display: flex; align-items: center; justify-content: center; transition: background 0.12s; }
-  .redweek-btn:hover { background: var(--info-bg); }
-  .redweek-pending { font-size: 13px; color: var(--text3); margin-top: 6px; display: block; }
+  .card-price { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .card-price sub { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--text2); }
+  .avail-badge {
+    font-size: 12.5px; padding: 4px 11px; border-radius: 999px; background: var(--success-bg);
+    color: var(--success-text); font-weight: 600; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .avail-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--success-text); }
+  .card-actions { display: flex; gap: 9px; margin-top: 14px; }
+  .inquire-btn {
+    flex: 1; padding: 11px; font-size: 15px; border-radius: 999px; border: none;
+    background: var(--accent); color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;
+    transition: transform 0.14s, box-shadow 0.14s, background 0.14s;
+  }
+  .inquire-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); background: var(--accent-deep); }
+  .redweek-btn {
+    flex: 1; padding: 11px; font-size: 13px; white-space: nowrap; border-radius: 999px;
+    border: 1px solid var(--border2); background: transparent; color: var(--accent);
+    display: flex; align-items: center; justify-content: center; transition: background 0.14s, border-color 0.14s; font-weight: 500;
+  }
+  .redweek-btn:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+  .redweek-pending { font-size: 12.5px; color: var(--text3); margin-top: 8px; display: block; }
 
   .state-msg { color: var(--text2); font-size: 16px; padding: 1.5rem 0; }
-  .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border2); border-top-color: var(--text); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  .spinner {
+    display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border2);
+    border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 8px;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .contact-box { margin-top: 2.5rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; }
-  .contact-box h2 { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
-  .contact-box .sub { font-size: 16px; color: var(--text2); margin-bottom: 1.25rem; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .form-grid input, .form-grid textarea, .form-grid select { width: 100%; padding: 11px 15px; font-size: 16px; border: 0.5px solid var(--border2); border-radius: 8px; background: var(--bg2); color: var(--text); font-family: inherit; outline: none; transition: border-color 0.12s; }
-  .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus { border-color: var(--text); }
+  /* CONTACT */
+  .contact-box {
+    margin-top: 2.5rem; background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-xl); padding: 2.5rem 2.5rem; box-shadow: var(--shadow-sm);
+  }
+  .contact-box h2 { font-size: 27px; margin-bottom: 0.5rem; }
+  .contact-box .sub { font-size: 16px; color: var(--text2); margin-bottom: 1.4rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 12px; }
+  .form-grid input, .form-grid textarea, .form-grid select {
+    width: 100%; padding: 12px 16px; font-size: 16px; border: 1px solid var(--border2);
+    border-radius: var(--radius); background: var(--bg2); color: var(--text);
+    font-family: inherit; outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-grid input:focus, .form-grid textarea:focus, .form-grid select:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+  }
   .form-grid textarea { grid-column: 1/-1; resize: vertical; }
   .form-grid select { grid-column: 1/-1; }
-  .send-btn { padding: 13px 32px; font-size: 16px; border-radius: 8px; border: none; background: var(--text); color: var(--bg); cursor: pointer; font-family: inherit; transition: opacity 0.12s; }
-  .send-btn:hover { opacity: 0.85; }
-  .form-note { font-size: 14px; color: var(--text3); margin-top: 10px; }
+  .send-btn {
+    padding: 13px 34px; font-size: 16px; border-radius: 999px; border: none;
+    background: var(--accent); color: #fff; cursor: pointer; font-family: inherit; font-weight: 500;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .send-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--accent-deep); }
+  .form-note { font-size: 14px; color: var(--text3); margin-top: 12px; }
+  .request-divider { border-top: 1px solid var(--border); margin: 2.25rem 0 1.85rem; }
+  .request-note {
+    font-size: 14px; color: var(--text2); padding: 14px 18px; background: var(--accent-soft);
+    border-radius: var(--radius); border-left: 3px solid var(--accent); line-height: 1.72; margin-bottom: 1rem;
+  }
 
-  footer { text-align: center; padding: 2rem; font-size: 14px; color: var(--text3); border-top: 0.5px solid var(--border); margin-top: 3rem; }
+  footer {
+    text-align: center; padding: 2.5rem 2rem; font-size: 14px; color: var(--text3);
+    border-top: 1px solid var(--border); margin-top: 3rem;
+  }
+  footer a { color: var(--accent); }
 
   @media (max-width: 640px) {
-    .hero { padding: 1.5rem 1.25rem; }
-    .hero h1 { font-size: 26px; }
-    .about-box { flex-direction: column; gap: 0.75rem; }
+    .container { padding: 1.5rem 1rem 3rem; }
+    .hero { padding: 2.25rem 1.5rem; border-radius: var(--radius-lg); }
+    .about-box { flex-direction: column; gap: 1rem; padding: 1.75rem 1.5rem; }
+    .booking-box, .contact-box { padding: 1.75rem 1.5rem; }
     .form-grid { grid-template-columns: 1fr; }
     .form-grid textarea, .form-grid select { grid-column: 1; }
     nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
-    .filter-label { min-width: 56px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .filter-label { min-width: 100%; width: 100%; }
     .card-actions { flex-direction: column; }
     .resort-cards { grid-template-columns: repeat(2, 1fr); }
   }
@@ -160,42 +397,43 @@
   <div class="nav-links">
     <a href="#about">Our story</a>
     <a href="#listings">Listings</a>
-    <a href="#booking">How it works</a>
+    <a href="#booking">Direct booking</a>
     <a class="nav-cta" href="#contact">Contact us</a>
   </div>
 </nav>
 
 <div class="container">
 
-  <div class="hero">
-    <div class="hero-tag">Westin &amp; Tafer Resort Rentals</div>
-    <h1>Premium vacation weeks for rent</h1>
-    <p>Luxury resort weeks at Westin Kaanapali (Maui), Westin Kierland (Scottsdale), and Garza Blanca (Puerto Vallarta &amp; Cancun). All 2-bedroom lockoff villas with full resort amenities — rented directly from the owners.</p>
+  <div class="hero rise rise-1">
+    <div class="hero-tag">✦ Westin &amp; Tafer Resort Rentals</div>
+    <h1>Premium vacation weeks,<br><em>rented from the owners</em></h1>
+    <p>Luxury resort weeks at Westin Kaanapali (Maui), Westin Kierland (Scottsdale), and Garza Blanca (Puerto Vallarta, Cancun &amp; Los Cabos). Spacious lockoff villas with full resort amenities, no broker fees.</p>
     <div class="hero-stats">
       <div class="stat-pill"><div class="slabel">Available weeks</div><div class="sval" id="avail-count">—</div></div>
-      <div class="stat-pill"><div class="slabel">Destinations</div><div class="sval">4</div></div>
-      <div class="stat-pill"><div class="slabel">Unit type</div><div class="sval">2BR</div></div>
+      <div class="stat-pill"><div class="slabel">Destinations</div><div class="sval">5</div></div>
+      <div class="stat-pill"><div class="slabel">Villa type</div><div class="sval">1BR / 2BR</div></div>
     </div>
   </div>
 
-  <div class="about-box" id="about">
+  <div class="about-box rise rise-2" id="about">
     <div class="about-icon">🏝️</div>
     <div class="about-content">
       <h2>How we ended up with too much of a good thing</h2>
-      <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts: Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta and Cancun. We love every one of them. The problem is, there are only so many weeks in a year.</p>
-      <p>Rather than let these weeks sit unused, we rent them out to fellow travellers who want a luxury resort experience without the ownership commitment. You get a stunning 2-bedroom villa at a top-tier resort; we get to feel slightly better about our timeshare habit. Everyone wins.</p>
+      <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts: Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta, Cancun and Los Cabos. We love every one of them. The problem is, there are only so many weeks in a year.</p>
+      <p>Rather than let these weeks sit unused, we rent them out to fellow travellers who want a luxury resort experience without the ownership commitment. You get a stunning one or two bedroom villa at a top-tier resort; we get to feel slightly better about our timeshare habit. Everyone wins.</p>
       <p>We handle the name-change paperwork and reservation transfer ourselves. No third-party broker fees, no markups. You're dealing directly with the owners, so communication is fast and personal.</p>
+      <p>Alternatively, you may continue to book via RedWeek, as we provide the RedWeek link for each listing (as soon as it's posted).</p>
       <div class="about-pills">
         <span class="about-pill">No broker fees</span>
         <span class="about-pill">Direct from owners</span>
         <span class="about-pill">Westin &amp; Tafer resorts</span>
-        <span class="about-pill">2BR lockoff villas</span>
+        <span class="about-pill">1 &amp; 2BR lockoff villas</span>
         <span class="about-pill">Maui · Scottsdale · Mexico</span>
       </div>
     </div>
   </div>
 
-  <div class="resorts-section">
+  <div class="resorts-section rise rise-3">
     <div class="section-label">Our resorts</div>
     <div class="resort-cards">
       <a class="resort-card" href="https://www.marriott.com/en-us/hotels/oggws-the-westin-kaanapali-ocean-resort-villas/overview/" target="_blank" rel="noopener">
@@ -223,7 +461,7 @@
         </div>
       </a>
       <a class="resort-card" href="https://www.garzablancaresort.com/puerto-vallarta" target="_blank" rel="noopener">
-        <div class="resort-card-thumb garza">🌅</div>
+        <div class="resort-card-thumb vallarta">🌅</div>
         <div class="resort-card-body">
           <div class="resort-card-name">Garza Blanca Preserve Resort &amp; Spa</div>
           <div class="resort-card-loc">Puerto Vallarta, Mexico</div>
@@ -231,17 +469,25 @@
         </div>
       </a>
       <a class="resort-card" href="https://cancun.garzablancaresort.com/" target="_blank" rel="noopener">
-        <div class="resort-card-thumb garza">🏖️</div>
+        <div class="resort-card-thumb cancun">🏖️</div>
         <div class="resort-card-body">
           <div class="resort-card-name">Garza Blanca Resort &amp; Spa</div>
           <div class="resort-card-loc">Cancún, Mexico</div>
           <div class="resort-card-link">View resort ↗</div>
         </div>
       </a>
+      <a class="resort-card" href="https://www.garzablancaresort.com/los-cabos" target="_blank" rel="noopener">
+        <div class="resort-card-thumb cabos">🏜️</div>
+        <div class="resort-card-body">
+          <div class="resort-card-name">Garza Blanca Resort &amp; Spa</div>
+          <div class="resort-card-loc">Los Cabos, Mexico</div>
+          <div class="resort-card-link">View resort ↗</div>
+        </div>
+      </a>
     </div>
   </div>
 
-  <div id="listings">
+  <div id="listings" class="rise rise-4">
     <div class="section-label">Browse listings</div>
     <div class="filters">
       <div class="filter-group">
@@ -250,7 +496,9 @@
           <button class="fbtn active" data-dest="all">All</button>
           <button class="fbtn" data-dest="maui">Maui</button>
           <button class="fbtn" data-dest="kierland">Scottsdale</button>
-          <button class="fbtn" data-dest="garza">Puerto Vallarta</button>
+          <button class="fbtn" data-dest="vallarta">Puerto Vallarta</button>
+          <button class="fbtn" data-dest="cancun">Cancún</button>
+          <button class="fbtn" data-dest="cabos">Los Cabos</button>
         </div>
       </div>
       <div class="filter-group">
@@ -275,7 +523,7 @@
   </div>
 
   <div class="booking-box" id="booking">
-    <h2>📋 How booking works</h2>
+    <h2>📋 How Direct Booking Works</h2>
     <div class="booking-steps">
       <div class="booking-step">
         <div class="step-num">Step 1</div>
@@ -285,12 +533,12 @@
       <div class="booking-step">
         <div class="step-num">Step 2</div>
         <div class="step-title">Sign a contract</div>
-        <div class="step-desc">We'll send a rental agreement to sign. We'll need your full legal name, address as on your ID, email, and phone number — the resort checks photo ID at check-in.</div>
+        <div class="step-desc">We'll send a rental agreement to sign. We'll need your full legal name, address as on your ID, email, and phone number, as the resort checks photo ID at check-in.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 3</div>
         <div class="step-title">Payment</div>
-        <div class="step-desc">New guests: 50% deposit to confirm, balance due shortly after the reservation is transferred. Returning guests: typically full payment upon transfer.</div>
+        <div class="step-desc">A 50% deposit is due upon signing the contract. The remaining balance is due once the reservation is transferred into your name.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 4</div>
@@ -299,10 +547,10 @@
       </div>
     </div>
     <div class="booking-notes">
-      <div class="booking-note"><strong>Payment methods —</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
-      <div class="booking-note"><strong>Cancellation policy —</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
-      <div class="booking-note"><strong>Book via RedWeek —</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available — we update postings as we list.</div>
-      <div class="booking-note"><strong>Resellers welcome —</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
+      <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
+      <div class="booking-note"><strong>Cancellation policy:</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
+      <div class="booking-note"><strong>Book via RedWeek:</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available, and we update postings as we list.</div>
+      <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
     </div>
   </div>
 
@@ -317,6 +565,29 @@
     </div>
     <button class="send-btn" onclick="sendInquiry()">Send inquiry →</button>
     <p class="form-note" id="form-note"></p>
+
+    <div class="request-divider"></div>
+
+    <h2>Don't see your dates? Request a resort &amp; week</h2>
+    <p class="sub">Tell us where and when you'd like to stay, and we'll see what we can do.</p>
+    <div class="request-note">We typically secure our weeks about a year in advance, so we can't always promise a specific date, but send us your request and we'll check availability for the week you have in mind.</div>
+    <div class="form-grid">
+      <input type="text" id="r-name" name="name" placeholder="Your name" />
+      <input type="email" id="r-email" name="email" placeholder="Your email address" />
+      <select id="r-resort" name="resort">
+        <option value="">Which resort?…</option>
+        <option value="Westin Ka'anapali Ocean Resort Villas (Maui)">Westin Ka'anapali Ocean Resort Villas – Maui</option>
+        <option value="Westin Ka'anapali Ocean Resort Villas North (Maui)">Westin Ka'anapali Ocean Resort Villas North – Maui</option>
+        <option value="Westin Kierland Villas (Scottsdale)">Westin Kierland Villas – Scottsdale</option>
+        <option value="Garza Blanca (Puerto Vallarta)">Garza Blanca – Puerto Vallarta</option>
+        <option value="Garza Blanca (Cancún)">Garza Blanca – Cancún</option>
+        <option value="Garza Blanca (Los Cabos)">Garza Blanca – Los Cabos</option>
+      </select>
+      <input type="text" id="r-week" name="week" placeholder="Preferred week or dates (e.g. first week of March 2027)" />
+      <textarea id="r-msg" name="message" rows="3" placeholder="Any flexibility on dates, villa size, or other details?"></textarea>
+    </div>
+    <button class="send-btn" onclick="sendRequest()">Send request →</button>
+    <p class="form-note" id="request-note-msg"></p>
   </div>
 
 
@@ -442,7 +713,7 @@ async function loadListings() {
     });
   } catch(e) {
     document.getElementById('grid').innerHTML =
-      '<p class="state-msg">Unable to load listings — please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
+      '<p class="state-msg">Unable to load listings. Please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
     document.getElementById('avail-count').textContent = '—';
     return;
   }
@@ -468,7 +739,9 @@ function matches(l) {
   const loc = getLocation(l).toLowerCase();
   if (dest === 'maui'     && !loc.includes('maui')) return false;
   if (dest === 'kierland' && !loc.includes('scottsdale') && !loc.includes('arizona')) return false;
-  if (dest === 'garza'    && !loc.includes('mexico') && !loc.includes('vallarta') && !loc.includes('cancun')) return false;
+  if (dest === 'vallarta' && !loc.includes('vallarta')) return false;
+  if (dest === 'cancun'   && !loc.includes('cancun') && !loc.includes('cancún')) return false;
+  if (dest === 'cabos'    && !loc.includes('cabo')) return false;
   if (year !== 'all' && String(l['year']) !== year) return false;
   if (month !== 'all' && getMonth(l) !== parseInt(month)) return false;
   return true;
@@ -495,7 +768,7 @@ function render() {
   });
 
   if (visible.length === 0) {
-    grid.innerHTML = '<p class="state-msg">No listings match your filters — try adjusting the selection above.</p>';
+    grid.innerHTML = '<p class="state-msg">No listings match your filters. Try adjusting the selection above.</p>';
     return;
   }
 
@@ -513,7 +786,14 @@ function render() {
     } else if (resortLower.includes('kierland')) {
       emoji = '\uD83C\uDF35'; cls = 'kierland';    // 🌵
     } else if (resortLower.includes('garza')) {
-      emoji = '\uD83C\uDF05'; cls = 'garza';       // 🌅
+      const gloc = getLocation(l).toLowerCase();
+      if (gloc.includes('cabo')) {
+        emoji = '\uD83C\uDFDC\uFE0F'; cls = 'cabos';      // 🏜️
+      } else if (gloc.includes('cancun') || gloc.includes('canc\u00fan')) {
+        emoji = '\uD83C\uDFD6\uFE0F'; cls = 'cancun';     // 🏖️
+      } else {
+        emoji = '\uD83C\uDF05'; cls = 'vallarta';         // 🌅
+      }
     } else {
       emoji = '\uD83C\uDFE8'; cls = 'maui-s';     // 🏨
     }
@@ -632,6 +912,58 @@ function sendInquiry() {
   .finally(() => {
     btn.disabled = false;
     btn.textContent = 'Send inquiry →';
+  });
+}
+
+function sendRequest() {
+  const name   = document.getElementById('r-name').value.trim();
+  const email  = document.getElementById('r-email').value.trim();
+  const resort = document.getElementById('r-resort').value;
+  const week   = document.getElementById('r-week').value.trim();
+  const msg    = document.getElementById('r-msg').value.trim();
+  const note   = document.getElementById('request-note-msg');
+
+  if (!name || !email) {
+    note.style.color = '#c0392b';
+    note.textContent = 'Please enter your name and email.';
+    return;
+  }
+
+  const btn = document.querySelectorAll('.send-btn')[1];
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  note.textContent = '';
+
+  fetch('https://formspree.io/f/mdayeyeg', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'Resort & week request',
+      name,
+      email,
+      resort: resort || 'Not specified',
+      week: week || 'Not specified',
+      message: msg
+    })
+  })
+  .then(res => res.json().then(data => ({ ok: res.ok, data })))
+  .then(({ ok, data }) => {
+    if (ok) {
+      note.style.color = '#3b6d11';
+      note.textContent = '✓ Your request has been sent! We\'ll check availability and get back to you.';
+      ['r-name','r-email','r-resort','r-week','r-msg'].forEach(id => document.getElementById(id).value = '');
+    } else {
+      note.style.color = '#c0392b';
+      note.textContent = data.error || 'Something went wrong. Please email us directly at ourextraweeks@gmail.com.';
+    }
+  })
+  .catch(() => {
+    note.style.color = '#c0392b';
+    note.textContent = 'Something went wrong. Please email us directly at ourextraweeks@gmail.com.';
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send request →';
   });
 }
 
