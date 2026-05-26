@@ -16,6 +16,13 @@
     --info-bg: #e6f1fb; --info-text: #185fa5;
     --amber-bg: #faeeda; --teal-bg: #e1f5ee;
     --blue-bg: #e6f1fb; --coral-bg: #faece7;
+    /* per-resort color coding */
+    --r-maui-s: #cfe9e4; --r-maui-s-edge: #2f9d8a;
+    --r-maui-n: #d8eccf; --r-maui-n-edge: #6aa641;
+    --r-kierland: #f3e3c4; --r-kierland-edge: #c79336;
+    --r-vallarta: #f7d9e4; --r-vallarta-edge: #d2598c;
+    --r-cancun: #f9ddcb; --r-cancun-edge: #df7a3c;
+    --r-cabos: #e6dcf3; --r-cabos-edge: #8a5fc0;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -26,6 +33,13 @@
       --info-bg: #042c53; --info-text: #b5d4f4;
       --amber-bg: #412402; --teal-bg: #04342c;
       --blue-bg: #042c53; --coral-bg: #4a1b0c;
+      /* per-resort color coding */
+      --r-maui-s: #0d3530; --r-maui-s-edge: #3fb5a1;
+      --r-maui-n: #1f3318; --r-maui-n-edge: #7cbf52;
+      --r-kierland: #3a2f12; --r-kierland-edge: #d8a843;
+      --r-vallarta: #3d2330; --r-vallarta-edge: #e0709d;
+      --r-cancun: #3c2716; --r-cancun-edge: #ec8c4e;
+      --r-cabos: #2c2440; --r-cabos-edge: #a079d6;
     }
   }
 
@@ -51,8 +65,7 @@
   .stat-pill .slabel { font-size: 13px; color: var(--text3); margin-bottom: 2px; }
   .stat-pill .sval { font-size: 22px; font-weight: 500; }
 
-  .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
-  .about-icon { font-size: 36px; flex-shrink: 0; margin-top: 2px; }
+  .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
   .about-content h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.6rem; }
   .about-content p { font-size: 16px; color: var(--text2); line-height: 1.8; margin-bottom: 0.65rem; }
   .about-content p:last-of-type { margin-bottom: 0.75rem; }
@@ -61,10 +74,22 @@
 
   .resorts-section { margin-bottom: 2rem; }
   .resorts-section h2 { font-size: 20px; font-weight: 500; margin-bottom: 1rem; }
+  .resort-info-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .resort-info { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 0.9rem 1.1rem; }
+  .resort-info-head { font-size: 15px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .rating-badge { font-size: 12px; font-weight: 500; color: var(--info-text); background: var(--info-bg); padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
+  .resort-info-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
   .resort-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .resort-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: var(--text); transition: box-shadow 0.15s; display: flex; flex-direction: column; }
   .resort-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .resort-card-thumb { height: 56px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+  .resort-card-thumb { height: 56px; display: flex; align-items: center; justify-content: center; font-size: 26px; border-bottom: 3px solid transparent; }
+  .resort-card-thumb.maui-s   { background: var(--r-maui-s);   border-bottom-color: var(--r-maui-s-edge); }
+  .resort-card-thumb.maui-n   { background: var(--r-maui-n);   border-bottom-color: var(--r-maui-n-edge); }
+  .resort-card-thumb.kierland { background: var(--r-kierland); border-bottom-color: var(--r-kierland-edge); }
+  .resort-card-thumb.vallarta { background: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .resort-card-thumb.cancun   { background: var(--r-cancun);   border-bottom-color: var(--r-cancun-edge); }
+  .resort-card-thumb.cabos    { background: var(--r-cabos);    border-bottom-color: var(--r-cabos-edge); }
+  .resort-card-thumb.garza    { background: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
   .resort-card-body { padding: 0.5rem 0.75rem 0.75rem; flex: 1; display: flex; flex-direction: column; gap: 2px; }
   .resort-card-name { font-size: 13px; font-weight: 500; line-height: 1.4; }
   .resort-card-loc { font-size: 13px; color: var(--text2); }
@@ -97,11 +122,14 @@
 
   .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.15s; }
   .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .card-thumb { min-height: 80px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0.85rem 1rem; }
-  .card-thumb.maui-n { background: var(--blue-bg); }
-  .card-thumb.maui-s { background: var(--teal-bg); }
-  .card-thumb.kierland { background: var(--amber-bg); }
-  .card-thumb.garza { background: var(--coral-bg); }
+  .card-thumb { min-height: 80px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0.85rem 1rem; border-bottom: 3px solid transparent; }
+  .card-thumb.maui-s   { background: var(--r-maui-s);   border-bottom-color: var(--r-maui-s-edge); }
+  .card-thumb.maui-n   { background: var(--r-maui-n);   border-bottom-color: var(--r-maui-n-edge); }
+  .card-thumb.kierland { background: var(--r-kierland); border-bottom-color: var(--r-kierland-edge); }
+  .card-thumb.vallarta { background: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
+  .card-thumb.cancun   { background: var(--r-cancun);   border-bottom-color: var(--r-cancun-edge); }
+  .card-thumb.cabos    { background: var(--r-cabos);    border-bottom-color: var(--r-cabos-edge); }
+  .card-thumb.garza    { background: var(--r-vallarta); border-bottom-color: var(--r-vallarta-edge); }
   .card-thumb-emoji { font-size: 26px; flex-shrink: 0; }
   .card-thumb-name { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--text); }
   .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
@@ -144,7 +172,6 @@
   @media (max-width: 640px) {
     .hero { padding: 1.5rem 1.25rem; }
     .hero h1 { font-size: 26px; }
-    .about-box { flex-direction: column; gap: 0.75rem; }
     .form-grid { grid-template-columns: 1fr; }
     .form-grid textarea, .form-grid select { grid-column: 1; }
     nav { padding: 0 1rem; }
@@ -152,6 +179,7 @@
     .filter-label { min-width: 56px; }
     .card-actions { flex-direction: column; }
     .resort-cards { grid-template-columns: repeat(2, 1fr); }
+    .resort-info-strip { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -180,8 +208,8 @@
     </div>
   </div>
 
+  <div class="section-label" style="margin-top:0.5rem;">Our story</div>
   <div class="about-box" id="about">
-    <div class="about-icon">🏝️</div>
     <div class="about-content">
       <h2>How we ended up with too much of a good thing</h2>
       <p>Over the years, our family and a close group of friends got a little carried away buying timeshare weeks at some genuinely spectacular resorts: Westin Kaanapali on Maui, Westin Kierland in Scottsdale, and Garza Blanca in Puerto Vallarta, Cancun and Los Cabos. We love every one of them. The problem is, there are only so many weeks in a year.</p>
@@ -200,6 +228,16 @@
 
   <div class="resorts-section">
     <div class="section-label">Our resorts</div>
+    <div class="resort-info-strip">
+      <div class="resort-info">
+        <div class="resort-info-head">Westin resorts <span class="rating-badge">◆ AAA Four Diamond</span></div>
+        <div class="resort-info-desc">Marriott Bonvoy timeshare villas with full kitchens, signature Heavenly beds, multiple pools, and full resort amenities.</div>
+      </div>
+      <div class="resort-info">
+        <div class="resort-info-head">Garza Blanca <span class="rating-badge">◆ AAA Four Diamond · Puerto Vallarta</span></div>
+        <div class="resort-info-desc">TAFER's AAA Four Diamond resort in Puerto Vallarta, plus five-star luxury beachfront resorts in Cancún and Los Cabos, with gourmet dining, spa, and attentive service.</div>
+      </div>
+    </div>
     <div class="resort-cards">
       <a class="resort-card" href="https://www.marriott.com/en-us/hotels/oggws-the-westin-kaanapali-ocean-resort-villas/overview/" target="_blank" rel="noopener">
         <div class="resort-card-thumb maui-s">🐋</div>
@@ -226,7 +264,7 @@
         </div>
       </a>
       <a class="resort-card" href="https://www.garzablancaresort.com/puerto-vallarta" target="_blank" rel="noopener">
-        <div class="resort-card-thumb garza">🌅</div>
+        <div class="resort-card-thumb vallarta">🌅</div>
         <div class="resort-card-body">
           <div class="resort-card-name">Garza Blanca Preserve Resort &amp; Spa</div>
           <div class="resort-card-loc">Puerto Vallarta, Mexico</div>
@@ -234,7 +272,7 @@
         </div>
       </a>
       <a class="resort-card" href="https://cancun.garzablancaresort.com/" target="_blank" rel="noopener">
-        <div class="resort-card-thumb garza">🏖️</div>
+        <div class="resort-card-thumb cancun">🏖️</div>
         <div class="resort-card-body">
           <div class="resort-card-name">Garza Blanca Resort &amp; Spa</div>
           <div class="resort-card-loc">Cancún, Mexico</div>
@@ -242,7 +280,7 @@
         </div>
       </a>
       <a class="resort-card" href="https://www.garzablancaresort.com/los-cabos" target="_blank" rel="noopener">
-        <div class="resort-card-thumb garza">🏜️</div>
+        <div class="resort-card-thumb cabos">🏜️</div>
         <div class="resort-card-body">
           <div class="resort-card-name">Garza Blanca Resort &amp; Spa</div>
           <div class="resort-card-loc">Los Cabos, Mexico</div>
@@ -302,13 +340,23 @@
       </div>
       <div class="booking-step">
         <div class="step-num">Step 3</div>
-        <div class="step-title">Payment</div>
-        <div class="step-desc">A 50% deposit is due upon signing the contract. The remaining balance is due once the reservation is transferred into your name.</div>
+        <div class="step-title">Pay the deposit</div>
+        <div class="step-desc">A 50% deposit is due upon signing the contract to confirm your booking.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 4</div>
         <div class="step-title">Reservation transfer</div>
-        <div class="step-desc">We update the reservation into your name directly with the resort. You're all set!</div>
+        <div class="step-desc">We update the reservation into your name directly with the resort. You will get a copy of the reservation confirmation email, and you may call the resort directly to confirm.</div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">Step 5</div>
+        <div class="step-title">Balance payment</div>
+        <div class="step-desc">The remaining balance is due once the reservation has been transferred into your name.</div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">Step 6</div>
+        <div class="step-title">Enjoy!</div>
+        <div class="step-desc">You're all set. Pack your bags and enjoy your stay.</div>
       </div>
     </div>
     <div class="booking-notes">
@@ -551,7 +599,14 @@ function render() {
     } else if (resortLower.includes('kierland')) {
       emoji = '\uD83C\uDF35'; cls = 'kierland';    // 🌵
     } else if (resortLower.includes('garza')) {
-      emoji = '\uD83C\uDF05'; cls = 'garza';       // 🌅
+      const gloc = getLocation(l).toLowerCase();
+      if (gloc.includes('cabo')) {
+        emoji = '\uD83C\uDFDC\uFE0F'; cls = 'cabos';      // 🏜️
+      } else if (gloc.includes('cancun') || gloc.includes('canc\u00fan')) {
+        emoji = '\uD83C\uDFD6\uFE0F'; cls = 'cancun';     // 🏖️
+      } else {
+        emoji = '\uD83C\uDF05'; cls = 'vallarta';         // 🌅
+      }
     } else {
       emoji = '\uD83C\uDFE8'; cls = 'maui-s';     // 🏨
     }
