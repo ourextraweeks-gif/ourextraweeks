@@ -97,7 +97,7 @@
 
   .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
   .booking-box h2 { font-size: 20px; font-weight: 500; margin-bottom: 1.25rem; }
-  .booking-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1.25rem; }
+  .booking-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
   .booking-step { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
   .booking-step .step-num { font-size: 13px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
   .booking-step .step-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
@@ -179,6 +179,7 @@
     .filter-label { min-width: 56px; }
     .card-actions { flex-direction: column; }
     .resort-cards { grid-template-columns: repeat(2, 1fr); }
+    .booking-steps { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
