@@ -612,11 +612,10 @@ function render() {
     }
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
-    const resort = getResortInfo(l);
-    const room = resort['room'] || l['type'] || '2BR';
-    const bath = resort['bath'] || '2';
-    const occupancy = resort['sleeps'] || l['sleeps'] || '';
-    const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : room;
+    const room = l['type'] || '';
+    const bath = l['bath'] || l['bathrooms'] || '';
+    const occupancy = l['sleeps'] || '';
+    const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : '';
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
       ? `$${Number(l['asking']).toLocaleString()} USD <sub>/ week</sub>`
@@ -644,7 +643,7 @@ function render() {
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${l['view']} · ${roomDisplay} · ${bath} bath${occupancy ? ` · sleeps ${occupancy}` : ''}</div>
+        <div class="card-meta">${[l['view'], roomDisplay, bath ? `${bath} bath` : '', occupancy ? `sleeps ${occupancy}` : ''].filter(Boolean).join(' · ')}</div>
         ${ref ? `<div class="card-ref">Ref: ${ref}</div>` : ''}
         <div class="card-footer">
           <div class="card-price">${price}</div>
