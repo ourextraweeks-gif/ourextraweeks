@@ -18,9 +18,9 @@
     --blue-bg: #e6f1fb; --coral-bg: #faece7;
     /* per-resort color coding */
     --r-maui-s: #cfe9e4; --r-maui-s-edge: #2f9d8a;
-    --r-maui-n: #d8eccf; --r-maui-n-edge: #6aa641;
+    --r-maui-n: #f7dce8; --r-maui-n-edge: #d96f9e;
     --r-kierland: #f3e3c4; --r-kierland-edge: #c79336;
-    --r-vallarta: #f7d9e4; --r-vallarta-edge: #d2598c;
+    --r-vallarta: #d8eccf; --r-vallarta-edge: #6aa641;
     --r-cancun: #f9ddcb; --r-cancun-edge: #df7a3c;
     --r-cabos: #e6dcf3; --r-cabos-edge: #8a5fc0;
   }
@@ -35,9 +35,9 @@
       --blue-bg: #042c53; --coral-bg: #4a1b0c;
       /* per-resort color coding */
       --r-maui-s: #0d3530; --r-maui-s-edge: #3fb5a1;
-      --r-maui-n: #1f3318; --r-maui-n-edge: #7cbf52;
+      --r-maui-n: #3d2532; --r-maui-n-edge: #e07ba6;
       --r-kierland: #3a2f12; --r-kierland-edge: #d8a843;
-      --r-vallarta: #3d2330; --r-vallarta-edge: #e0709d;
+      --r-vallarta: #1f3318; --r-vallarta-edge: #7cbf52;
       --r-cancun: #3c2716; --r-cancun-edge: #ec8c4e;
       --r-cabos: #2c2440; --r-cabos-edge: #a079d6;
     }
@@ -331,7 +331,7 @@
       <div class="booking-step">
         <div class="step-num">Step 1</div>
         <div class="step-title">Express interest</div>
-        <div class="step-desc">Inquire via the form below, by email, or through RedWeek if a listing is posted there.</div>
+        <div class="step-desc">Inquire via the form below or by email (ourextraweeks@gmail.com).</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 2</div>
@@ -360,10 +360,10 @@
       </div>
     </div>
     <div class="booking-notes">
-      <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
+      <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal. When paying via PayPal, please select "Friends and Family" or "Sending to a friend" when prompted to choose a payment type, otherwise significant fees apply. Any transaction fees are the responsibility of the payor.</div>
       <div class="booking-note"><strong>Cancellation policy:</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
       <div class="booking-note"><strong>Book via RedWeek:</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available, and we update postings as we list.</div>
-      <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
+      <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a guest. We'll hold the reservation and update the guest name once confirmed.</div>
     </div>
   </div>
 
@@ -619,7 +619,7 @@ function render() {
     const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : room;
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
-      ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
+      ? `$${Number(l['asking']).toLocaleString()} USD <sub>/ week</sub>`
       : `<span style="font-size:14px">Price on request</span>`;
     const ref = l['ref'] || '';
     const safeRef = ref.replace(/'/g, "\\'");
