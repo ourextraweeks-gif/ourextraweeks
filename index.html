@@ -18,9 +18,9 @@
     --blue-bg: #e6f1fb; --coral-bg: #faece7;
     /* per-resort color coding */
     --r-maui-s: #cfe9e4; --r-maui-s-edge: #2f9d8a;
-    --r-maui-n: #f7dce8; --r-maui-n-edge: #d96f9e;
+    --r-maui-n: #d4f0e0; --r-maui-n-edge: #3fae78;
     --r-kierland: #f3e3c4; --r-kierland-edge: #c79336;
-    --r-vallarta: #d8eccf; --r-vallarta-edge: #6aa641;
+    --r-vallarta: #f7d9e4; --r-vallarta-edge: #d2598c;
     --r-cancun: #f9ddcb; --r-cancun-edge: #df7a3c;
     --r-cabos: #e6dcf3; --r-cabos-edge: #8a5fc0;
   }
@@ -35,9 +35,9 @@
       --blue-bg: #042c53; --coral-bg: #4a1b0c;
       /* per-resort color coding */
       --r-maui-s: #0d3530; --r-maui-s-edge: #3fb5a1;
-      --r-maui-n: #3d2532; --r-maui-n-edge: #e07ba6;
+      --r-maui-n: #14352a; --r-maui-n-edge: #4fc28e;
       --r-kierland: #3a2f12; --r-kierland-edge: #d8a843;
-      --r-vallarta: #1f3318; --r-vallarta-edge: #7cbf52;
+      --r-vallarta: #3d2330; --r-vallarta-edge: #e0709d;
       --r-cancun: #3c2716; --r-cancun-edge: #ec8c4e;
       --r-cabos: #2c2440; --r-cabos-edge: #a079d6;
     }
@@ -53,6 +53,11 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta { font-size: 15px; padding: 8px 16px; border-radius: 8px; border: 0.5px solid var(--border2); color: var(--text); text-decoration: none; transition: background 0.12s; }
   .nav-cta:hover { background: var(--bg2); color: var(--text) !important; }
+  .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; padding: 0; background: transparent; border: 0.5px solid var(--border2); border-radius: 8px; cursor: pointer; }
+  .nav-toggle span { display: block; width: 18px; height: 2px; background: var(--text); margin: 0 auto; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
@@ -175,11 +180,22 @@
     .form-grid { grid-template-columns: 1fr; }
     .form-grid textarea, .form-grid select { grid-column: 1; }
     nav { padding: 0 1rem; }
-    .nav-links { gap: 1rem; }
+    .nav-toggle { display: flex; }
+    .nav-links { position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg); border-bottom: 0.5px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.12); padding: 0.5rem 0; max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+    .nav-links.open { max-height: 320px; }
+    .nav-links a { font-size: 16px; padding: 13px 1.25rem; }
+    .nav-links a:not(.nav-cta) { border-bottom: 0.5px solid var(--border); }
+    .nav-cta { border: none; border-radius: 0; padding: 14px 1.25rem; }
+    .nav-cta:hover { background: var(--bg2); }
     .filter-label { min-width: 56px; }
     .card-actions { flex-direction: column; }
-    .resort-cards { grid-template-columns: repeat(2, 1fr); }
-    .booking-steps { grid-template-columns: repeat(2, 1fr); }
+    .resort-cards { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .resort-card-thumb { height: 44px; font-size: 22px; }
+    .resort-card-body { padding: 0.4rem 0.45rem 0.55rem; }
+    .resort-card-name { font-size: 11.5px; line-height: 1.3; }
+    .resort-card-loc { font-size: 11px; }
+    .resort-card-link { font-size: 11px; }
+    .booking-steps { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -187,7 +203,10 @@
 
 <nav>
   <a class="nav-brand" href="#">Our Extra Weeks</a>
-  <div class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
     <a href="#about">Our story</a>
     <a href="#listings">Listings</a>
     <a href="#booking">Direct booking</a>
@@ -331,7 +350,7 @@
       <div class="booking-step">
         <div class="step-num">Step 1</div>
         <div class="step-title">Express interest</div>
-        <div class="step-desc">Inquire via the form below or by email (ourextraweeks@gmail.com).</div>
+        <div class="step-desc">Inquire via the form below, by email, or through RedWeek if a listing is posted there.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 2</div>
@@ -360,10 +379,10 @@
       </div>
     </div>
     <div class="booking-notes">
-      <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal. When paying via PayPal, please select "Friends and Family" or "Sending to a friend" when prompted to choose a payment type, otherwise significant fees apply. Any transaction fees are the responsibility of the payor.</div>
+      <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
       <div class="booking-note"><strong>Cancellation policy:</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
       <div class="booking-note"><strong>Book via RedWeek:</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available, and we update postings as we list.</div>
-      <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a guest. We'll hold the reservation and update the guest name once confirmed.</div>
+      <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
     </div>
   </div>
 
@@ -413,6 +432,21 @@
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+function toggleNav() {
+  const links = document.getElementById('nav-links');
+  const btn = document.getElementById('nav-toggle');
+  const open = links.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+document.getElementById('nav-links').addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('nav-toggle').classList.remove('open');
+    document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+  }
+});
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3TWX11WuudebrzNXPdfz8GNRP71rvScQQz9jg1s25J8ULjlH7pJdjVOsDsxm_e8Hje/pub?gid=1539875952&single=true&output=csv';
 const RESORT_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXQ7GNHxBOEM3TWX11WuudebrzNXPdfz8GNRP71rvScQQz9jg1s25J8ULjlH7pJdjVOsDsxm_e8Hje/pub?gid=836794829&single=true&output=csv';
@@ -612,13 +646,14 @@ function render() {
     }
     const loc = getLocation(l);
     const dateStr = getDateDisplay(l);
-    const room = l['type'] || '';
-    const bath = l['bath'] || l['bathrooms'] || '';
-    const occupancy = l['sleeps'] || '';
-    const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : '';
+    const resort = getResortInfo(l);
+    const room = resort['room'] || l['type'] || '2BR';
+    const bath = resort['bath'] || '2';
+    const occupancy = resort['sleeps'] || l['sleeps'] || '';
+    const roomDisplay = room ? room.replace(/^(\d+)(BR|BA)?/i, '$1 Bedroom') : room;
     const redweek = getRedweek(l);
     const price = l['asking'] && l['asking'] !== ''
-      ? `$${Number(l['asking']).toLocaleString()} USD <sub>/ week</sub>`
+      ? `$${Number(l['asking']).toLocaleString()} <sub>/ week</sub>`
       : `<span style="font-size:14px">Price on request</span>`;
     const ref = l['ref'] || '';
     const safeRef = ref.replace(/'/g, "\\'");
@@ -643,7 +678,7 @@ function render() {
           <div class="card-date">${dateStr}</div>
           <span class="yr-badge">${l['year']}</span>
         </div>
-        <div class="card-meta">${[l['view'], roomDisplay, bath ? `${bath} bath` : '', occupancy ? `sleeps ${occupancy}` : ''].filter(Boolean).join(' · ')}</div>
+        <div class="card-meta">${l['view']} · ${roomDisplay} · ${bath} bath${occupancy ? ` · sleeps ${occupancy}` : ''}</div>
         ${ref ? `<div class="card-ref">Ref: ${ref}</div>` : ''}
         <div class="card-footer">
           <div class="card-price">${price}</div>
