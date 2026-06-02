@@ -512,6 +512,17 @@ function getMonth(l) {
   return d ? d.month : null;
 }
 
+// Returns a sortable number (YYYYMMDD) from the start date; undated rows sort last.
+function getStartDateValue(l) {
+  const s = l['start date'] || l['startdate'] || l['start_date'] || l['dates'] || '';
+  const m = s.trim().match(/([a-z]{3})\s+(\d+)\s+(\d{4})/i);
+  if (!m) return Infinity;
+  const month = MONTH_SHORT[m[1].toLowerCase()] || 0;
+  const day = parseInt(m[2], 10) || 0;
+  const year = parseInt(m[3], 10) || 0;
+  return year * 10000 + month * 100 + day;
+}
+
 function getResortInfo(l) {
   const resortKey = (l['resort'] || '').toLowerCase().trim();
   const typeKey = (l['type'] || '').toLowerCase().trim();
@@ -614,7 +625,11 @@ function matches(l) {
 
 function render() {
   const grid = document.getElementById('grid');
-  const visible = allListings.filter(matches);
+  const visible = allListings.filter(matches).sort((a, b) => {
+    const da = getStartDateValue(a), db = getStartDateValue(b);
+    if (da !== db) return da - db;
+    return (a['resort'] || '').localeCompare(b['resort'] || '');
+  });
   document.getElementById('avail-count').textContent = allListings.length;
 
   const anyActive = Object.values(activeFilters).some(v => v !== 'all');
