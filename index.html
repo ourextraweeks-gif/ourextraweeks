@@ -544,7 +544,13 @@ let activeFilters = { dest: 'all', year: 'all', month: 'all' };
 
 async function loadListings() {
   try {
-    const [res1, res2] = await Promise.all([fetch(CSV_URL), fetch(RESORT_CSV_URL)]);
+    // Cache-buster: a unique param + no-store defeats browser/HTTP caching so the
+    // site always pulls the freshest published CSV snapshot from Google.
+    const bust = `&_cb=${Date.now()}`;
+    const [res1, res2] = await Promise.all([
+      fetch(CSV_URL + bust, { cache: 'no-store' }),
+      fetch(RESORT_CSV_URL + bust, { cache: 'no-store' })
+    ]);
     if (!res1.ok) throw new Error(`HTTP ${res1.status}`);
     const [text1, text2] = await Promise.all([res1.text(), res2.text()]);
 
