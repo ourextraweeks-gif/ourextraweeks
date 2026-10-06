@@ -70,6 +70,13 @@
   .stat-pill .slabel { font-size: 13px; color: var(--text3); margin-bottom: 2px; }
   .stat-pill .sval { font-size: 22px; font-weight: 500; }
 
+  .assure { display: flex; align-items: flex-start; gap: 10px; background: var(--success-bg); color: var(--success-text); border-radius: var(--radius); padding: 12px 16px; font-size: 15px; line-height: 1.6; }
+  .assure-mark { font-weight: 600; flex-shrink: 0; }
+  .assure strong { font-weight: 600; }
+  .assure a { color: inherit; white-space: nowrap; }
+  .hero .assure { margin-top: 1.25rem; max-width: 620px; }
+  #listings .assure { margin-bottom: 1rem; }
+
   .about-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
   .about-content h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.6rem; }
   .about-content p { font-size: 16px; color: var(--text2); line-height: 1.8; margin-bottom: 0.65rem; }
@@ -101,7 +108,9 @@
   .resort-card-link { font-size: 13px; color: var(--info-text); margin-top: 4px; }
 
   .booking-box { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin-bottom: 2rem; }
-  .booking-box h2 { font-size: 20px; font-weight: 500; margin-bottom: 1.25rem; }
+  .booking-box h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.75rem; }
+  .booking-intro { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; max-width: 720px; }
+  .booking-intro strong { color: var(--text); font-weight: 500; }
   .booking-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
   .booking-step { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
   .booking-step .step-num { font-size: 13px; font-weight: 600; color: var(--info-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
@@ -225,6 +234,10 @@
       <div class="stat-pill"><div class="slabel">Destinations</div><div class="sval">5</div></div>
       <div class="stat-pill"><div class="slabel">Villa type</div><div class="sval">1BR / 2BR</div></div>
     </div>
+    <div class="assure">
+      <span class="assure-mark" aria-hidden="true">✓</span>
+      <span><strong>You pay in two parts.</strong> A 25% deposit holds your week. The balance is due only after the reservation is in your name, and you can call the resort to confirm it first.</span>
+    </div>
   </div>
 
   <div class="section-label" style="margin-top:0.5rem;">Our story</div>
@@ -336,6 +349,10 @@
         </div>
       </div>
     </div>
+    <div class="assure">
+      <span class="assure-mark" aria-hidden="true">✓</span>
+      <span><strong>Balance due only after the reservation is in your name.</strong> You can confirm it with the resort before you pay the rest. <a href="#booking">How direct booking works</a></span>
+    </div>
     <p class="result-count" id="result-count"></p>
     <div class="listing-grid" id="grid">
       <p class="state-msg"><span class="spinner"></span> Loading listings…</p>
@@ -344,11 +361,12 @@
 
   <div class="booking-box" id="booking">
     <h2>📋 How Direct Booking Works</h2>
+    <p class="booking-intro">You can book any of our weeks two ways. <strong>Through RedWeek</strong>, if you'd rather pay by credit card and have a third-party platform handle the booking. Each listing shows its RedWeek link once it's posted. Or <strong>directly with us</strong>, which avoids the third-party fees. Here are the steps for booking direct:</p>
     <div class="booking-steps">
       <div class="booking-step">
         <div class="step-num">Step 1</div>
         <div class="step-title">Express interest</div>
-        <div class="step-desc">Inquire via the form below, by email, or through RedWeek if a listing is posted there.</div>
+        <div class="step-desc">Inquire via the form below or by email.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 2</div>
@@ -358,7 +376,7 @@
       <div class="booking-step">
         <div class="step-num">Step 3</div>
         <div class="step-title">Pay the deposit</div>
-        <div class="step-desc">A 50% deposit is due upon signing the contract to confirm your booking.</div>
+        <div class="step-desc">A 25% deposit is due upon signing the contract to confirm your booking.</div>
       </div>
       <div class="booking-step">
         <div class="step-num">Step 4</div>
@@ -379,7 +397,6 @@
     <div class="booking-notes">
       <div class="booking-note"><strong>Payment methods:</strong> Zelle, Interac e-Transfer (we'll provide the CAD equivalent), or PayPal Friends &amp; Family. All amounts in USD. Any transaction fees are the responsibility of the payor.</div>
       <div class="booking-note"><strong>Cancellation policy:</strong> All bookings are final. No cancellations or refunds once the reservation has been transferred.</div>
-      <div class="booking-note"><strong>Book via RedWeek:</strong> Guests are welcome to book through RedWeek if they prefer to pay by credit card or want the added security of a third-party platform. A RedWeek link is shown on each listing where available, and we update postings as we list.</div>
       <div class="booking-note"><strong>Resellers welcome:</strong> Travel agents and resellers may purchase a week on behalf of a client. We'll hold the reservation and update the guest name once confirmed.</div>
     </div>
   </div>
