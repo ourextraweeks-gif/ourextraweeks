@@ -43,6 +43,7 @@
     "email": "ourextraweeks@gmail.com",
     "availableLanguage": "English"
   },
+  "sameAs": ["https://www.facebook.com/ourextraweeks"],
   "areaServed": ["Maui, Hawaii", "Scottsdale, Arizona", "Puerto Vallarta, Mexico", "Cancún, Mexico", "Los Cabos, Mexico"]
 }
 </script>
@@ -430,7 +431,7 @@
 
   <div class="contact-box" id="contact">
     <h2>Inquire about a week</h2>
-    <p class="sub">Fill in the form below and we'll get back to you promptly at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>
+    <p class="sub">Fill in the form below and we'll get back to you promptly at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>, or message us on <a href="https://www.facebook.com/ourextraweeks" target="_blank" rel="noopener">Facebook</a>.</p>
     <div class="form-grid">
       <input type="text" id="f-name" name="name" placeholder="Your name" />
       <input type="email" id="f-email" name="email" placeholder="Your email address" />
@@ -469,7 +470,8 @@
 
 <footer>
   &copy; <span id="yr"></span> Our Extra Weeks &nbsp;·&nbsp;
-  <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>
+  <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a> &nbsp;·&nbsp;
+  <a href="https://www.facebook.com/ourextraweeks" target="_blank" rel="noopener">Follow us on Facebook</a>
 </footer>
 
 <script>
@@ -602,7 +604,7 @@ async function loadListings() {
     });
   } catch(e) {
     document.getElementById('grid').innerHTML =
-      '<p class="state-msg">Unable to load listings. Please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>.</p>';
+      '<p class="state-msg">Unable to load listings. Please refresh or email us at <a href="mailto:ourextraweeks@gmail.com">ourextraweeks@gmail.com</a>, or message us on <a href="https://www.facebook.com/ourextraweeks" target="_blank" rel="noopener">Facebook</a>.</p>';
     document.getElementById('avail-count').textContent = '—';
     return;
   }
