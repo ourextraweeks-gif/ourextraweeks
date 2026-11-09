@@ -165,6 +165,14 @@
   .fbtn:hover:not(.active) { background: var(--bg3); color: var(--text); }
 
   .result-count { font-size: 15px; color: var(--text3); margin-bottom: 1rem; }
+  .soldout-banner { font-size: 15px; color: var(--text2); padding: 12px 16px; background: var(--amber-bg); border-radius: var(--radius); border-left: 3px solid #c79336; line-height: 1.6; margin-bottom: 1rem; }
+  .soldout-banner strong { color: var(--text); font-weight: 600; }
+  .fbtn.soldout { text-decoration: line-through; opacity: 0.7; }
+  .soldout-box { grid-column: 1/-1; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 1.5rem; text-align: center; }
+  .soldout-box .so-title { font-size: 22px; font-weight: 600; margin-bottom: 0.4rem; }
+  .soldout-box p { font-size: 15px; color: var(--text2); margin-bottom: 1rem; }
+  .soldout-box .so-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .soldout-box button, .soldout-box a { padding: 10px 18px; font-size: 15px; border-radius: 8px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text); cursor: pointer; text-decoration: none; font-family: inherit; }
 
   .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
 
@@ -370,7 +378,7 @@
         <span class="filter-label">Year</span>
         <div class="filter-chips" id="year-filters">
           <button class="fbtn active" data-year="all">All</button>
-          <button class="fbtn" data-year="2026">2026</button>
+          <button class="fbtn soldout" data-year="2026" title="Sold out">2026</button>
           <button class="fbtn" data-year="2027">2027</button>
         </div>
       </div>
@@ -381,6 +389,7 @@
         </div>
       </div>
     </div>
+    <div class="soldout-banner"><strong>2026 is sold out.</strong> Thank you! We're now booking 2027. Don't see your dates? <a href="#contact" onclick="setTimeout(()=>document.getElementById('r-name').focus(),400)">Send us a request</a>.</div>
     <p class="result-count" id="result-count"></p>
     <div class="listing-grid" id="grid">
       <p class="state-msg"><span class="spinner"></span> Loading listings…</p>
@@ -583,6 +592,8 @@ function getRedweek(l) {
   return `https://www.redweek.com/posting/${val.trim()}`;
 }
 
+const SOLD_OUT_YEARS = ['2026'];
+
 let allListings = [];
 let activeFilters = { dest: 'all', year: 'all', month: 'all' };
 
@@ -600,7 +611,7 @@ async function loadListings() {
     if (parsed.length === 0) throw new Error('No rows parsed');
     allListings = parsed.filter(r => {
       const s = (r['status'] || '').toLowerCase().trim();
-      return s === 'available';
+      return s === 'available' && !SOLD_OUT_YEARS.includes(String(r['year']).trim());
     });
   } catch(e) {
     document.getElementById('grid').innerHTML =
@@ -657,6 +668,19 @@ function render() {
     opt.textContent = `${ref}${l['resort']} · ${d} (${l['year']})`;
     sel.appendChild(opt);
   });
+
+  if (SOLD_OUT_YEARS.includes(activeFilters.year)) {
+    document.getElementById('result-count').textContent = '';
+    grid.innerHTML = `<div class="soldout-box">
+      <div class="so-title">${activeFilters.year} is sold out</div>
+      <p>Every week we had for ${activeFilters.year} has been booked. Thank you! Take a look at 2027, or tell us the dates you want and we'll check.</p>
+      <div class="so-actions">
+        <button onclick="document.querySelector('[data-year=&quot;2027&quot;]').click()">See 2027 weeks</button>
+        <a href="#contact">Request dates</a>
+      </div>
+    </div>`;
+    return;
+  }
 
   if (visible.length === 0) {
     grid.innerHTML = '<p class="state-msg">No listings match your filters. Try adjusting the selection above.</p>';
