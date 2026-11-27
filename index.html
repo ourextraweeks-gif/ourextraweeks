@@ -569,6 +569,9 @@
   .filter-label { font-size: 13px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A4A; min-width: 104px; }
   .fbtn { min-height: 44px; padding: 0 18px; border-radius: 999px; font-size: 15px; font-weight: 800; cursor: pointer; border: 2px solid #1A1A1A; background: #FFFFFF; color: #1A1A1A; }
   .fbtn.active { background: #17798A; color: #FFFFFF; }
+  .fbtn-soldout, .fbtn-soldout:hover { background: #EFEAE0; color: #8A8478; border-color: #B9B2A5; cursor: not-allowed; }
+  .fbtn-soldout s { text-decoration-thickness: 2px; }
+  .fbtn-soldout .so-tag { font-size: 11px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: #D8435B; margin-left: 4px; }
   .deal-section { padding-bottom: 0; }
   .deal-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 18px; margin: 0 0 22px; padding: 18px 26px; background: #1A1A1A; color: #FFFFFF; border: 3px solid #1A1A1A; border-radius: 14px; box-shadow: 6px 6px 0 #D8435B; }
   .deal-banner strong { font-size: clamp(30px, 7vw, 48px); font-weight: 900; letter-spacing: 0.02em; line-height: 1; text-transform: uppercase; }
@@ -845,7 +848,7 @@
   <h2 class="sec-title">Available weeks</h2>
   <p class="sec-sub">Prices are for the full 7-night week, in US dollars.</p>
   <div class="filters">
-    <div class="filter-row"><span class="filter-label">Destination</span><div class="filter-row" id="dest-filters"><button class="fbtn active" data-dest="all">All</button><button class="fbtn" data-dest="maui">Maui</button><button class="fbtn" data-dest="pv">Puerto Vallarta</button></div></div>
+    <div class="filter-row"><span class="filter-label">Destination</span><div class="filter-row" id="dest-filters"><button class="fbtn active" data-dest="all">All</button><button class="fbtn" data-dest="maui">Maui</button><button class="fbtn fbtn-soldout" type="button" disabled aria-disabled="true" title="Sold out for 2027"><s>Scottsdale</s> <span class="so-tag">sold out</span></button><button class="fbtn" data-dest="pv">Puerto Vallarta</button></div></div>
     <div class="filter-row"><span class="filter-label">Month</span><div class="filter-row" id="month-filters"><button class="fbtn active" data-month="all">All</button><button class="fbtn" data-month="2">February</button><button class="fbtn" data-month="3">March</button><button class="fbtn" data-month="12">December</button></div></div>
   </div>
   <div class="soldout-banner wood"><strong>2026 is sold out, and so are all our 2027 Westin Kierland (Scottsdale) weeks.</strong> Thank you! We're still booking 2027 in Maui and Puerto Vallarta. Don't see your dates? <a href="#request">Send us a request</a>.</div>
@@ -1131,6 +1134,8 @@ const MONTH_NAMES = ['January','February','March','April','May','June','July','A
 const MONTH_SHORT = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12 };
 const DEST_OF = { kaan: 'maui', north: 'maui', kier: 'az', pv: 'pv', cancun: 'cancun', cabos: 'cabos' };
 const DESTS = [['maui','Maui'],['az','Scottsdale'],['pv','Puerto Vallarta'],['cancun','Cancún'],['cabos','Los Cabos']];
+// Destinations shown crossed out in the filter when they have no weeks left. Remove the entry when weeks are added again.
+const SOLDOUT_DESTS = { az: 'Sold out for 2027' };
 const PLACE = { maui: 'Maui', az: 'Scottsdale', pv: 'Puerto Vallarta', cancun: 'Cancún', cabos: 'Los Cabos' };
 const FLOWER = { maui: '#D8435B', az: '#EDB443', pv: '#8E5BB5', cancun: '#39B3C2', cabos: '#E05FA8' };
 const FLOWER_BY_RESORT = { kaan: '#D8435B', north: '#EE7B30', kier: '#EDB443', pv: '#8E5BB5', cancun: '#39B3C2', cabos: '#E05FA8' };
@@ -1270,7 +1275,9 @@ function chip(label, attr, val, active) {
 function buildDestFilters() {
   const present = new Set(allListings.map(l => DEST_OF[resortKey(l)]).filter(Boolean));
   document.getElementById('dest-filters').innerHTML =
-    chip('All', 'dest', 'all', true) + DESTS.filter(([id]) => present.has(id)).map(([id, label]) => chip(label, 'dest', id, false)).join('');
+    chip('All', 'dest', 'all', true) + DESTS.filter(([id]) => present.has(id) || SOLDOUT_DESTS[id]).map(([id, label]) => present.has(id)
+      ? chip(label, 'dest', id, false)
+      : `<button class="fbtn fbtn-soldout" type="button" disabled aria-disabled="true" title="${esc(SOLDOUT_DESTS[id])}"><s>${esc(label)}</s> <span class="so-tag">sold out</span></button>`).join('');
 }
 
 function buildMonthFilters() {
